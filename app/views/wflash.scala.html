@@ -1,0 +1,10 @@
+@import helper._
+@import helper.twitterBootstrap._
+
+@flash.map {
+    case (key, value) => {
+        <p class="@key">
+            <span class="label @key">@value</span>
+        </p>
+    }
+}

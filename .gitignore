@@ -6,3 +6,8 @@ tmp
 weetweet.iml
 .idea
 db
+.classpath
+.project
+.settings
+out
+conf/mail.conf

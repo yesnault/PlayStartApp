@@ -4,6 +4,19 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /dashboard                  controllers.Dashboard.index()
+
+POST    /login                      controllers.Application.authenticate()
+GET     /logout                     controllers.Application.logout()
+
+GET     /signup                     controllers.account.Signup.create()
+POST    /signup                     controllers.account.Signup.save()
+GET     /confirm/:email/:hash  controllers.account.Signup.confirm(email:String, hash:String)
+
+GET     /reset/ask                  controllers.account.Reset.ask()
+POST    /reset/ask                  controllers.account.Reset.runAsk()
+GET     /reset/confirm/:email/:hash  controllers.account.Reset.confirm(email:String, hash:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

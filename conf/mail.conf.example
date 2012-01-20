@@ -1,0 +1,22 @@
+# SMTP serveur, example : smtp.gmail.com
+mail.hostname=smtp.gmail.com
+
+# Mail Port, example : 587 or 25
+mail.port=587
+
+# Mail Auth User, example : user@gmail.com
+# Comment if no auth
+mail.user=user@gmail.com
+
+# Mail Auth Password
+# Comment if no auth
+mail.password=password
+
+# Mail TLS : true ou false
+mail.tls=true
+
+# Mail user from
+mail.from="Play20StartApp@yourdomain.com"
+
+# Mail sign
+mail.sign=The Play20StartApp Team

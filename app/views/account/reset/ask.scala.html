@@ -1,0 +1,31 @@
+@(resetForm: Form[controllers.account.Reset.Resetpassword])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+
+@main() {
+
+    <h3>@Messages("resetpassword")</h3>
+
+    @wflash()
+
+    @form(controllers.account.routes.Reset.runAsk()) {
+
+        <fieldset>
+            @inputText(
+            resetForm("email"),
+            'placeholder -> Messages("email"),
+            '_label -> null
+            )
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" class="btn primary" value="@Messages("validate")">
+
+            <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
+        </div>
+    }
+
+
+}

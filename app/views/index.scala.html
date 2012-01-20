@@ -1,7 +1,8 @@
-@(message: String)
+@(signupForm: Form[User], loginForm: Form[Application.Login])
 
-@main("Welcome to Play 2.0 RC1") {
-    
-    @play20.welcome(message)
-    
+@main() {
+
+    @login(loginForm)
+    @account.signup.create(signupForm)
+
 }

@@ -1,0 +1,52 @@
+title=Play20StartApp
+
+confirm=Confirmation
+email=Email
+fullname=Nom Complet
+goback=Go Back
+logout=Logout
+password=Password
+error.technical=Technical Error, please Retry
+validate=Validate
+
+account.not.validated.check.mail=Account not validated. Check your emails.
+account.successfully.validated=Account successfully validated
+invalid.user.or.password=Invalid user or password
+youve.been.logged.out=You've been logged out
+error.sending.email=Error sending email
+error.sending.confirm.email=Error while sending confirmation mail
+error.email.already.exist=Email already exist
+error.account.already.validated=Account already validated
+error.unknown.email=Unknown email
+error.confirm=Confirmation failed
+
+signin.signin=Sign In
+signin.your.email=Your email address
+signin.your.password=Your password
+
+forgot.password=Forgot password ?
+
+signup.signup=Sign Up
+signup.successfull=Sign Up - Successfull !
+signup.new=New ?
+signup.valid.email=Please choose a valid Email
+signup.valid.fullname=Please choose a valid Full Name
+signup.valid.password=Please choose a Password
+signup.reset.password=Reset your password
+signup.msg.created=You will receive a confirmation email soon. Check your emails to activate your account.
+
+resetpassword=Reset Password
+resetpassword.mailsent=A mail has been sent, please check your mails.
+resetpassword.success=A new password has been sent. Please check your mails.
+
+mail.confirm.subject=Welcome to Play20StartApp - Ask for confirmation
+mail.confirm.message=Welcome to Play20StartApp. <br> Click on this link : {0} to confirm your email.
+
+mail.welcome.subject=Welcome to Play20StartApp
+mail.welcome.message=Welcome to Play20StartApp. <br> Your account is validated. Enjoy !
+
+mail.reset.ask.subject=Play20StartApp - New password
+mail.reset.ask.message=You've ask for reset your password ? <br> Click on this link : {0} to confirm the reset.
+
+mail.reset.confirm.subject=Play20StartApp - New password
+mail.reset.confirm.message=A new password has been generated : {0}
