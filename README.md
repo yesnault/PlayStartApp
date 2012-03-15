@@ -16,7 +16,8 @@ This is a sample application using Play Framework 2.0
 
 ## Try
 * Rename conf/email.conf.example in conf/email.conf and check it (smtp, etc...)
-* Checkout, compile Play20 from github (or Play 2.0 Full Release if available)
+* Download Play Framework 2 from http://www.playframework.org/
+* Open a terminal in Play20StartApp directory and exec `play run`
 
 ## Contact :
 
