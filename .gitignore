@@ -3,8 +3,8 @@ project/project
 project/target
 target
 tmp
-weetweet.iml
 .idea
+Play20StartApp.iml
 db
 .classpath
 .project
