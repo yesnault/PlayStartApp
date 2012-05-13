@@ -8,8 +8,7 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0"
 
     val appDependencies = Seq(
-      // Add your project dependencies here,
-      "org.apache.commons" % "commons-email" % "1.2"
+      "com.typesafe" %% "play-plugins-mailer" % "2.0.2"
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(

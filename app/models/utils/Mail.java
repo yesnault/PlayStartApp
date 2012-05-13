@@ -1,9 +1,7 @@
 package models.utils;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
+import com.typesafe.plugin.MailerAPI;
+import com.typesafe.plugin.MailerPlugin;
 import play.Configuration;
 import play.Logger;
 
@@ -47,46 +45,28 @@ public class Mail {
         }
     }
 
-    /**
-     * Init globals mail parameters.
-     *
-     * @return Email object initialized
-     */
-    private static Email init() {
-        Email email = new HtmlEmail();
-
-        email.setHostName(Configuration.root().getString("mail.hostname"));
-        email.setSmtpPort(Configuration.root().getInt("mail.port"));
-        if (Configuration.root().getString("mail.user") != null) {
-            email.setAuthenticator(new DefaultAuthenticator(Configuration.root().getString("mail.user"),
-                    Configuration.root().getString("mail.password")));
-        }
-
-        email.setTLS(Configuration.root().getBoolean("mail.tls"));
-        return email;
-    }
 
     /**
      * Send a email.
      *
      * @param envelop envelop to send
-     * @throws EmailException configuration mail exception
      */
-    public static void sendMail(Mail.Envelop envelop) throws EmailException {
+    public static void sendMail(Mail.Envelop envelop) {
+        MailerAPI email = play.Play.application().plugin(MailerPlugin.class).email();
 
-
-        Email email = init();
-        try {
-            email.setFrom(Configuration.root().getString("mail.from"));
-            email.setSubject(envelop.subject);
-            ((HtmlEmail) email).setHtmlMsg(envelop.message + "<br><br>--<br>" + Configuration.root().getString("mail.sign"));
-            for (String toEmail : envelop.toEmails) {
-                email.addTo(toEmail);
-            }
-            email.send();
-        } catch (EmailException e) {
-            Logger.error(e.getMessage());
-            throw e;
+        email.addFrom(Configuration.root().getString("mail.from"));
+        email.setSubject(envelop.subject);
+        for (String toEmail : envelop.toEmails) {
+            email.addRecipient(toEmail);
+            Logger.debug("Mail will be send to " + toEmail);
         }
+        email.send(envelop.message + "\n\n " + Configuration.root().getString("mail.sign"),
+                envelop.message + "<br><br>--<br>" + Configuration.root().getString("mail.sign"));
+
+        Logger.debug("Mail sent - SMTP:" + Configuration.root().getString("smtp.host")
+                + ":" + Configuration.root().getString("smtp.port")
+                + " SSL:" + Configuration.root().getString("smtp.ssl")
+                + " user:" + Configuration.root().getString("smtp.user")
+                + " password:" + Configuration.root().getString("smtp.password"));
     }
 }
