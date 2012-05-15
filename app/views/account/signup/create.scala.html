@@ -3,37 +3,35 @@
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
-@main() {
+<h3>@Messages("signup.new")</h3>
 
-        <h3>@Messages("signup.new")</h3>
+@wflash()
 
-        @wflash()
+@form(controllers.account.routes.Signup.save()) {
 
-        @form(controllers.account.routes.Signup.save()) {
+<fieldset>
+    @inputText(
+    signupForm("email"),
+    'placeholder -> Messages("email"),
+    '_label -> null,
+    '_help -> Messages("signup.valid.email")
+    )
+    @inputText(
+    signupForm("fullname"),
+    'placeholder -> Messages("fullname"),
+    '_label -> null,
+    '_help -> Messages("signup.valid.fullname")
+    )
+    @inputPassword(
+    signupForm("password"),
+    '_label -> null,
+    'placeholder -> Messages("password"),
+    '_help -> Messages("signup.valid.password")
+    )
+</fieldset>
 
-            <fieldset>
-                @inputText(
-                    signupForm("email"),
-                    'placeholder -> Messages("email"),
-                    '_label -> null,
-                    '_help -> Messages("signup.valid.email")
-                )
-                @inputText(
-                    signupForm("fullname"),
-                    'placeholder -> Messages("fullname"),
-                    '_label -> null,
-                    '_help -> Messages("signup.valid.fullname")
-                )
-                @inputPassword(
-                    signupForm("password"),
-                    '_label -> null,
-                    'placeholder -> Messages("password"),
-                    '_help -> Messages("signup.valid.password")
-                )
-            </fieldset>
-
-            <div class="actions">
-                <input type="submit" class="btn primary" value="@Messages("signup.signup")">
-            </div>
-        }
+<div class="actions">
+    <input type="submit" class="btn primary" value="@Messages("signup.signup")">
+</div>
 }
+

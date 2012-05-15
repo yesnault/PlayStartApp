@@ -1,0 +1,12 @@
+@(user: User)
+
+@if(user != null) {
+    <div class="btn-group pull-right">
+        <a class="btn" href="#"><i class="icon-user"></i> @user.fullname</a>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li class="divider"></li>
+            <li><a href="@routes.Application.logout()"><i class="icon-off"></i> @Messages("logout")</a></li>
+        </ul>
+    </div>
+}

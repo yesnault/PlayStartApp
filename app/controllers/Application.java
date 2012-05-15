@@ -2,7 +2,6 @@ package controllers;
 
 import models.User;
 import models.utils.AppException;
-import play.Logger;
 import play.data.Form;
 import play.data.validation.Constraints;
 import play.i18n.Messages;
@@ -20,8 +19,21 @@ public class Application extends Controller {
             routes.Application.index()
     );
 
+    public static Result GO_DASHBOARD = redirect(
+            routes.Dashboard.index()
+    );
+
+    /**
+     * Display the login page or dashboard if connected
+     *
+     * @return login page or dashboard
+     */
     public static Result index() {
-        return ok(index.render(form(User.class), form(Login.class)));
+        if (ctx().session().get("email") != null) {
+            return GO_DASHBOARD;
+        } else {
+            return ok(index.render(form(User.class), form(Login.class)));
+        }
     }
 
     /**
@@ -70,9 +82,7 @@ public class Application extends Controller {
             return badRequest(index.render(form(User.class), loginForm));
         } else {
             session("email", loginForm.get().email);
-            return redirect(
-                    routes.Dashboard.index()
-            );
+            return GO_DASHBOARD;
         }
     }
 
