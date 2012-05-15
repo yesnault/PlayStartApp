@@ -9,6 +9,8 @@ GET     /dashboard                  controllers.Dashboard.index()
 POST    /login                      controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 
+GET     /settings                   controllers.account.Settings.index()
+
 GET     /signup                     controllers.account.Signup.create()
 POST    /signup                     controllers.account.Signup.save()
 GET     /confirm/:email/:hash  controllers.account.Signup.confirm(email:String, hash:String)
