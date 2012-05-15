@@ -12,7 +12,7 @@ smtp.user=user@gmail.com
 # Comment if no auth
 smtp.password=password
 
-# Mail TLS : true ou false
+# Mail SSL : true ou false
 smtp.ssl=true
 
 # Mail user from
