@@ -11,7 +11,7 @@ This is a sample application using Play Framework 2.0
 * No clear password stored in db
 * Secure workflow to reset password
 * I18n example (en, fr)
-* Using Apache Common Email : http://commons.apache.org/email/
+* Using Typesafe Plugin Mailer : https://github.com/typesafehub/play-plugins/tree/master/mailer
 * Using Twitter Bootstrap : http://twitter.github.com/bootstrap/
 
 ## Try
