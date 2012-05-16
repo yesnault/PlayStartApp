@@ -1,4 +1,4 @@
-@(resetForm: Form[controllers.account.Reset.Resetpassword])
+@(askForm: Form[controllers.account.Reset.AskForm])
 
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
@@ -14,14 +14,14 @@
 
         <fieldset>
             @inputText(
-            resetForm("email"),
+            askForm("email"),
             'placeholder -> Messages("email"),
             '_label -> null
             )
         </fieldset>
 
         <div class="form-actions">
-            <input type="submit" class="btn btn-primary" value="@Messages("validate")">
+            <input type="submit" class="btn btn-primary" value="@Messages("reset")">
 
             <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
         </div>

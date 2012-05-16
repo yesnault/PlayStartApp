@@ -31,13 +31,11 @@ public class User extends Model {
     @Column(unique = true)
     public String fullname;
 
+    public String confirmationToken;
+
     @Constraints.Required
-    transient
-    public String password;
-
+    @Formats.NonEmpty
     public String passwordHash;
-
-    public int passwordSalt;
 
     @Formats.DateTime(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date dateCreation;
@@ -45,8 +43,8 @@ public class User extends Model {
     @Formats.NonEmpty
     public Boolean validated = false;
 
-    // -- Queries
-    public static Model.Finder<String, User> find = new Model.Finder(String.class, User.class);
+    // -- Queries (long id, user.class)
+    public static Model.Finder<Long, User> find = new Model.Finder(Long.class, User.class);
 
     /**
      * Retrieve a user from an email.
@@ -68,30 +66,14 @@ public class User extends Model {
         return find.where().eq("fullname", fullname).findUnique();
     }
 
-
     /**
-     * Init the salt and hash password and detroy the clear password.
+     * Retrieves a user from a validation token.
      *
-     * @throws models.utils.AppException App Exception
+     * @param token
+     * @return a user if the validation token is found.
      */
-    public void initPassword() throws AppException {
-        this.passwordSalt = Hash.getSalt();
-        this.passwordHash = Hash.getHashString(this.passwordSalt, this.password);
-        this.password = null;
-    }
-
-    /**
-     * Reset the password with a new password.
-     * Call to initPassword in internal.
-     *
-     * @return clear password generated
-     * @throws AppException App Exception
-     */
-    public String resetPassword() throws AppException {
-        String clearPassword = Hash.getRandomString();
-        this.password = clearPassword;
-        this.initPassword();
-        return clearPassword;
+    public static User findByConfirmationToken(String token) {
+        return find.where().eq("confirmationToken", token).findUnique();
     }
 
     /**
@@ -108,45 +90,33 @@ public class User extends Model {
         User user = find.where().eq("email", email).findUnique();
         if (user != null) {
             // get the hash password from the salt + clear password
-            String passwordHash = Hash.getHashString(user.passwordSalt, clearPassword);
-
-            // try to get the user with email and Hash Password
-            return authenticateWithHash(email, passwordHash);
+            if (Hash.checkPassword(clearPassword, user.passwordHash)) {
+              return user;
+            }
         }
         return null;
     }
 
-    /**
-     * Confirm an account.
-     *
-     * @param email        email
-     * @param hashPassword hash password
-     * @return User or null if not validated
-     * @throws AppException App Exception
-     */
-    public static User confirm(String email, String hashPassword) throws AppException {
-        User user = authenticateWithHash(email, hashPassword);
-
-        if (user != null) {
-            user.validated = true;
-            user.save();
-        }
-        return user;
+    public void changePassword(String password) throws AppException {
+        this.passwordHash = Hash.createPassword(password);
+        this.save();
     }
 
     /**
-     * Try to retrieve a user from an email and a hash password
+     * Confirms an account.
      *
-     * @param email        email
-     * @param passwordHash Hash Password
-     * @return a user or null if user unknown
+     * @return true if confirmed, false otherwise.
+     * @throws AppException App Exception
      */
-    private static User authenticateWithHash(String email, String passwordHash) {
-        // try to get the user with email and Hash Password
-        return find.where()
-                .eq("email", email)
-                .eq("passwordHash", passwordHash)
-                .findUnique();
+    public static boolean confirm(User user) throws AppException {
+        if (user == null) {
+          return false;
+        }
+
+        user.confirmationToken = null;
+        user.validated = true;
+        user.save();
+        return true;
     }
 
 }

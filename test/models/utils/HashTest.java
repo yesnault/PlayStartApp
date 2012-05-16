@@ -11,16 +11,15 @@ public class HashTest {
 
     @Test
     public void getHashString() throws AppException {
-        int salt = Hash.getSalt();
-        String password = Hash.getHashString(salt, "fooTest");
-
-        Assert.assertNotNull(salt);
+        String password = Hash.createPassword("fooTest");
         Assert.assertNotNull(password);
 
-        String password2 = Hash.getHashString(salt, "fooTest");
+        boolean matches = Hash.checkPassword("fooTest", password);
 
-        Assert.assertEquals(password, password2);
-        Assert.assertEquals(password.length(), 50);
+        Assert.assertTrue("Password does not match but should match", matches);
 
+        boolean badPassword = Hash.checkPassword("badPassword", password);
+
+        Assert.assertFalse("Password matches but should not match", badPassword);
     }
 }

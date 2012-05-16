@@ -58,8 +58,9 @@ public class Mail {
         email.setSubject(envelop.subject);
         for (String toEmail : envelop.toEmails) {
             email.addRecipient(toEmail);
-            Logger.debug("Mail will be send to " + toEmail);
+            Logger.debug("Mail.sendMail: Mail will be sent to " + toEmail);
         }
+
         email.send(envelop.message + "\n\n " + Configuration.root().getString("mail.sign"),
                 envelop.message + "<br><br>--<br>" + Configuration.root().getString("mail.sign"));
 

@@ -11,13 +11,20 @@ GET     /logout                     controllers.Application.logout()
 
 GET     /settings                   controllers.account.Settings.index()
 
+# Registers the user, sending an email to confirm the account.
 GET     /signup                     controllers.account.Signup.create()
 POST    /signup                     controllers.account.Signup.save()
-GET     /confirm/:email/:hash  controllers.account.Signup.confirm(email:String, hash:String)
 
+# Accessed when the user confirms the registration.
+GET     /confirm/:confirmToken      controllers.account.Signup.confirm(confirmToken:String)
+
+# Displays a page to send a reset email given the user's email.
 GET     /reset/ask                  controllers.account.Reset.ask()
 POST    /reset/ask                  controllers.account.Reset.runAsk()
-GET     /reset/confirm/:email/:hash  controllers.account.Reset.confirm(email:String, hash:String)
+
+# Resets the password using the password.
+GET     /reset/:resetToken          controllers.account.Reset.reset(resetToken:String)
+POST    /reset/:resetToken          controllers.account.Reset.runReset(resetToken:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

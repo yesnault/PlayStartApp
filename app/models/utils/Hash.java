@@ -1,11 +1,11 @@
 package models.utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.util.UUID;
 
 /**
- * Hash util class.
+ * Password utility class.  This handles password encryption and validation.
  * <p/>
  * User: yesnault
  * Date: 25/01/12
@@ -13,59 +13,31 @@ import java.util.UUID;
 public class Hash {
 
     /**
-     * Get a hash string from a clear string and a salt.
+     * Create an encrypted password from a clear string.
      *
-     * @param salt        the salt
      * @param clearString the clear string
-     * @return a hash of the clear string
+     * @return an encrypted password of the clear string
      * @throws AppException APP Exception, from NoSuchAlgorithmException
      */
-    public static String getHashString(int salt, String clearString) throws AppException {
-
-        StringBuilder toHash = new StringBuilder();
-        toHash.append(salt);
-        toHash.append(clearString);
-
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-            md.reset();
-        } catch (NoSuchAlgorithmException e) {
-            throw ExceptionFactory.getNewAppException(e);
+    public static String createPassword(String clearString) throws AppException {
+        if (clearString == null) {
+            throw new AppException("No password defined!");
         }
-
-        md.update(toHash.toString().getBytes());
-        byte byteData[] = md.digest();
-
-        //convert the byte to hex format
-        StringBuilder sb = new StringBuilder();
-
-        for (byte aByteData : byteData) {
-            sb.append(Integer.toString((aByteData & 0xff) + 0x100, 16).substring(1));
-        }
-
-        // and we keep a substring :)
-        return sb.substring(5, 55);
+        return BCrypt.hashpw(clearString, BCrypt.gensalt());
     }
 
     /**
-     * Get a new salt, between 1 and 9000000.
-     *
-     * @return a salt
+     * @param candidate the clear text
+     * @param encryptedPassword the encrypted password string to check.
+     * @return true if the candidate matches, false otherwise.
      */
-    public static int getSalt() {
-        int lower = 1;
-        int higher = 9000000;
-
-        return (int) (Math.random() * (higher - lower)) + lower;
-    }
-
-    /**
-     * Return a random String
-     *
-     * @return
-     */
-    public static String getRandomString() {
-        return UUID.randomUUID().toString();
+    public static boolean checkPassword(String candidate, String encryptedPassword) {
+        if (candidate == null) {
+            return false;
+        }
+        if (encryptedPassword == null) {
+            return false;
+        }
+        return BCrypt.checkpw(candidate, encryptedPassword);
     }
 }
