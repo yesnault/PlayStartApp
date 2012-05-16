@@ -1,8 +1,17 @@
 @(signupForm: Form[User], loginForm: Form[Application.Login])
 
 @main() {
+  <div class="span3">
+    &nbsp;
+  </div>
 
-    @login(loginForm)
-    @account.signup.create(signupForm)
-
+  <div class="span5">
+    <div class="well">
+      @login(loginForm)
+    </div>
+    
+    <div class="well">
+      @account.signup.create(signupForm)
+    </div>
+  </div>
 }
