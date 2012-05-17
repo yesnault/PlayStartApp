@@ -44,7 +44,7 @@ public class User extends Model {
     public Boolean validated = false;
 
     // -- Queries (long id, user.class)
-    public static Model.Finder<Long, User> find = new Model.Finder(Long.class, User.class);
+    public static Model.Finder<Long, User> find = new Model.Finder<Long, User>(Long.class, User.class);
 
     /**
      * Retrieve a user from an email.
@@ -67,10 +67,10 @@ public class User extends Model {
     }
 
     /**
-     * Retrieves a user from a validation token.
+     * Retrieves a user from a confirmation token.
      *
-     * @param token
-     * @return a user if the validation token is found.
+     * @param token the confirmation token to use.
+     * @return a user if the confirmation token is found, null otherwise.
      */
     public static User findByConfirmationToken(String token) {
         return find.where().eq("confirmationToken", token).findUnique();
