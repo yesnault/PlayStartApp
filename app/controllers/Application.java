@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import models.utils.AppException;
+import play.Logger;
 import play.data.Form;
 import play.data.validation.Constraints;
 import play.i18n.Messages;
@@ -29,11 +30,19 @@ public class Application extends Controller {
      * @return login page or dashboard
      */
     public static Result index() {
-        if (ctx().session().get("email") != null) {
-            return GO_DASHBOARD;
-        } else {
-            return ok(index.render(form(User.class), form(Login.class)));
+        // Check that the email matches a confirmed user before we redirect
+        String email = ctx().session().get("email");
+        if (email != null) {
+            User user = User.findByEmail(email);
+            if (user != null && user.validated) {
+                return GO_DASHBOARD;
+            } else {
+                Logger.debug("Clearing invalid session credentials");
+                session().clear();
+            }
         }
+
+        return ok(index.render(form(Register.class), form(Login.class)));
     }
 
     /**
@@ -69,6 +78,42 @@ public class Application extends Controller {
 
     }
 
+    public static class Register {
+
+        @Constraints.Required
+        public String email;
+
+        @Constraints.Required
+        public String fullname;
+
+        @Constraints.Required
+        public String password;
+
+        /**
+         * Validate the authentication.
+         *
+         * @return null if validation ok, string with details otherwise
+         */
+        public String validate() {
+            if (isBlank(email)) {
+                return "Email is required";
+            }
+
+            if (isBlank(fullname)) {
+                return "Full name is required";
+            }
+
+            if (isBlank(password)) {
+                return "Password is required";
+            }
+
+            return null;
+        }
+
+        private boolean isBlank(String input) {
+            return input == null || input.isEmpty() || input.trim().isEmpty();
+        }
+    }
 
     /**
      * Handle login form submission.
@@ -78,8 +123,10 @@ public class Application extends Controller {
     public static Result authenticate() {
         Form<Login> loginForm = form(Login.class).bindFromRequest();
 
+        Form<Register> registerForm = form(Register.class);
+
         if (loginForm.hasErrors()) {
-            return badRequest(index.render(form(User.class), loginForm));
+            return badRequest(index.render(registerForm, loginForm));
         } else {
             session("email", loginForm.get().email);
             return GO_DASHBOARD;

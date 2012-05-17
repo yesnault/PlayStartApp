@@ -8,6 +8,7 @@ logout=Déconnexion
 password=Mot de passe
 error.technical=Erreur Technique, veuillez retenter
 validate=Valider
+reset=Reset
 
 account.not.validated.check.mail=Votre compte n'est pas validé, vérifiez vos emails...
 account.successfully.validated=Votre compte est validé
@@ -19,6 +20,7 @@ error.email.already.exist=Cette adresse mail est déjà utilisée
 error.account.already.validated=Votre compte est déjà validé
 error.unknown.email=Adresse mail inconnue
 error.confirm=Error lors de la confirmation de votre inscription
+error.expiredresetlink=Cette mot de passe reset est périmé.
 
 signin.signin=Se Connecter
 signin.your.email=Votre adresse mail
@@ -49,4 +51,4 @@ mail.reset.ask.subject=Play20StartApp - Changement de mot de passe ?
 mail.reset.ask.message=Bonjour, <br><br> Cliquez ici : {0} pour confirmer votre demande de changement de mot de passe.
 
 mail.reset.confirm.subject=Play20StartApp - Changement de mot de passe
-mail.reset.confirm.message=Bonjour, <br><br> Voici votre nouveau mot de passe : {0}
+mail.reset.confirm.message=Bonjour, <br><br> Votre mot de passe changement
