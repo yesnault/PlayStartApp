@@ -9,7 +9,6 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       "com.typesafe" %% "play-plugins-mailer" % "2.0.2",
-      "com.roundeights" % "hasher" % "0.3" from "http://cloud.github.com/downloads/Nycto/Hasher/hasher_2.9.1-0.3.jar",
       "org.mindrot" % "jbcrypt" % "0.3m"
     )
 
