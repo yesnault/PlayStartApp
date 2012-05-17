@@ -14,8 +14,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.account.reset.ask;
 import views.html.account.reset.reset;
-
-import views.html.account.reset.confirm;
 import views.html.account.reset.runAsk;
 
 import java.net.MalformedURLException;
@@ -123,19 +121,21 @@ public class Reset extends Controller {
 
     public static Result reset(String token) {
         ResetToken resetToken = ResetToken.findByToken(token);
+        Form<ResetForm> resetForm = form(ResetForm.class);
 
         if (resetToken == null) {
-          flash("error", Messages.get("error.technical"));
-          return badRequest(confirm.render());
+            flash("error", Messages.get("error.technical"));
+            Form<AskForm> askForm = form(AskForm.class);
+            return badRequest(ask.render(askForm));
         }
 
         if (resetToken.isExpired()) {
             resetToken.delete();
             flash("error", Messages.get("error.expiredresetlink"));
-            return badRequest(confirm.render());
+            Form<AskForm> askForm = form(AskForm.class);
+            return badRequest(ask.render(askForm));
         }
 
-        Form<ResetForm> resetForm = form(ResetForm.class);
         return ok(reset.render(resetForm, token));
     }
 
@@ -150,13 +150,13 @@ public class Reset extends Controller {
             ResetToken resetToken = ResetToken.findByToken(token);
             if (resetToken == null) {
               flash("error", Messages.get("error.technical"));
-              return badRequest(confirm.render());
+              return badRequest(reset.render(resetForm, token));
             }
 
             if (resetToken.isExpired()) {
                 resetToken.delete();
                 flash("error", Messages.get("error.expiredresetlink"));
-                return badRequest(confirm.render());
+                return badRequest(reset.render(resetForm, token));
             }
 
             // check email
@@ -165,7 +165,7 @@ public class Reset extends Controller {
                 // display no detail (email unknown for example) to
                 // avoir check email by foreigner
                 flash("error", Messages.get("error.technical"));
-                return badRequest(confirm.render());
+                return badRequest(reset.render(resetForm, token));
             }
 
             String password = resetForm.get().password;
@@ -174,13 +174,13 @@ public class Reset extends Controller {
             // Send email saying that the password has just been changed.
             sendPasswordChanged(user);
             flash("success", Messages.get("resetpassword.success"));
-            return ok(confirm.render(), token);
+            return ok(reset.render(resetForm, token));
         } catch (AppException e) {
             flash("error", Messages.get("error.technical"));
-            return badRequest(confirm.render());
+            return badRequest(reset.render(resetForm, token));
         } catch (EmailException e) {
             flash("error", Messages.get("error.technical"));
-            return badRequest(confirm.render());
+            return badRequest(reset.render(resetForm, token));
         }
 
     }
