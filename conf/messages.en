@@ -40,6 +40,7 @@ signup.msg.created=You will receive a confirmation email soon. Check your email 
 resetpassword=Reset Password
 resetpassword.mailsent=A mail has been sent, please check your mail.
 resetpassword.success=A new password has been sent. Please check your mail.
+resetpassword.new.password=New password :
 
 mail.confirm.subject=Welcome to Play20StartApp - Ask for confirmation
 mail.confirm.message=Welcome to Play20StartApp. <br> Click on this link : {0} to confirm your email.

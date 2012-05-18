@@ -61,6 +61,7 @@ public class Reset extends Controller {
         Form<AskForm> askForm = form(AskForm.class).bindFromRequest();
 
         if (askForm.hasErrors()) {
+            flash("error", Messages.get("signup.valid.email"));
             return badRequest(ask.render(askForm));
         }
 
@@ -120,9 +121,14 @@ public class Reset extends Controller {
 
 
     public static Result reset(String token) {
-        ResetToken resetToken = ResetToken.findByToken(token);
-        Form<ResetForm> resetForm = form(ResetForm.class);
 
+        if (token == null) {
+            flash("error", Messages.get("error.technical"));
+            Form<AskForm> askForm = form(AskForm.class);
+            return badRequest(ask.render(askForm));
+        }
+
+        ResetToken resetToken = ResetToken.findByToken(token);
         if (resetToken == null) {
             flash("error", Messages.get("error.technical"));
             Form<AskForm> askForm = form(AskForm.class);
@@ -136,6 +142,7 @@ public class Reset extends Controller {
             return badRequest(ask.render(askForm));
         }
 
+        Form<ResetForm> resetForm = form(ResetForm.class);
         return ok(reset.render(resetForm, token));
     }
 
@@ -145,6 +152,11 @@ public class Reset extends Controller {
      */
     public static Result runReset(String token) {
         Form<ResetForm> resetForm = form(ResetForm.class).bindFromRequest();
+
+        if (resetForm.hasErrors()) {
+            flash("error", Messages.get("signup.valid.password"));
+            return badRequest(reset.render(resetForm, token));
+        }
 
         try {
             ResetToken resetToken = ResetToken.findByToken(token);

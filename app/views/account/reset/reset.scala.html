@@ -10,7 +10,7 @@
 
     @wflash()
 
-    token
+    @Messages("resetpassword.new.password")
     @form(controllers.account.routes.Reset.runReset(token)) {
 
         <fieldset>
@@ -22,7 +22,8 @@
         </fieldset>
 
         <div class="form-actions">
-            <input type="submit" class="btn btn-primary" value="@Messages("password")">
+            <input type="submit" class="btn btn-primary" value="@Messages("validate")">
+            <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
         </div>
     }
 
