@@ -51,8 +51,8 @@ mail.welcome.message=Bienvenue sur Play20StartApp. <br><br> Votre compte est val
 mail.reset.ask.subject=Play20StartApp - Changement de mot de passe ?
 mail.reset.ask.message=Bonjour, <br><br> Cliquez ici : {0} pour confirmer votre demande de changement de mot de passe.
 
-mail.reset.fail.subject=Account Access Attempted
-mail.reset.fail.message=You (or someone else) entered this email address when trying to change the password.  However, this email address is not on our list of registered users, and so the attempted password reset has failed.
+mail.reset.fail.subject=Tentative d'accès à votre compte
+mail.reset.fail.message=Bonjour, <br><br> Vous (ou quelqu'un d'autre) a saisi votre adresse e-mail pour tenter de changer votre mot de passe. Cette adresse e-mail n'est pas sur notre liste des utilisateurs enregistrés, la tentative de ré-initialisation de mot de passe a donc échoué.
 
 mail.reset.confirm.subject=Play20StartApp - Changement de mot de passe
 mail.reset.confirm.message=Bonjour, <br><br> Votre mot de passe a été changé.
