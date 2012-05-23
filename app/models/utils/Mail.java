@@ -1,12 +1,25 @@
 package models.utils;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.dispatch.ExecutionContextExecutorService;
+import akka.dispatch.*;
+import akka.util.Duration;
+import akka.util.FiniteDuration;
+import akka.util.Timeout;
+
+import akka.dispatch.ExecutionContexts;
+import akka.dispatch.ExecutionContextExecutorService;
+
 import com.typesafe.plugin.MailerAPI;
 import com.typesafe.plugin.MailerPlugin;
 import play.Configuration;
 import play.Logger;
+import play.libs.Akka;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Send a mail with Play20StartApp.
@@ -15,6 +28,9 @@ import java.util.List;
  * Date: 24/01/12
  */
 public class Mail {
+
+    /** 1 second delay on sending emails */
+    private static final int DELAY = 1;
 
     /**
      * Envelop to prepare.
@@ -45,29 +61,45 @@ public class Mail {
         }
     }
 
-
     /**
-     * Send a email.
+     * Send a email, using Akka to offload it to an actor.
      *
      * @param envelop envelop to send
      */
     public static void sendMail(Mail.Envelop envelop) {
-        MailerAPI email = play.Play.application().plugin(MailerPlugin.class).email();
+        EnvelopJob envelopJob = new EnvelopJob(envelop);
+        final FiniteDuration delay = Duration.create(DELAY, TimeUnit.SECONDS);
+        Akka.system().scheduler().scheduleOnce(delay, envelopJob);
+    }
 
-        email.addFrom(Configuration.root().getString("mail.from"));
-        email.setSubject(envelop.subject);
-        for (String toEmail : envelop.toEmails) {
-            email.addRecipient(toEmail);
-            Logger.debug("Mail.sendMail: Mail will be sent to " + toEmail);
+    static class EnvelopJob implements Runnable {
+        Mail.Envelop envelop;
+
+        public EnvelopJob(Mail.Envelop envelop) {
+            this.envelop = envelop;
         }
 
-        email.send(envelop.message + "\n\n " + Configuration.root().getString("mail.sign"),
-                envelop.message + "<br><br>--<br>" + Configuration.root().getString("mail.sign"));
+        public void run() {
+            MailerAPI email = play.Play.application().plugin(MailerPlugin.class).email();
 
-        Logger.debug("Mail sent - SMTP:" + Configuration.root().getString("smtp.host")
-                + ":" + Configuration.root().getString("smtp.port")
-                + " SSL:" + Configuration.root().getString("smtp.ssl")
-                + " user:" + Configuration.root().getString("smtp.user")
-                + " password:" + Configuration.root().getString("smtp.password"));
+            final Configuration root = Configuration.root();
+            final String mailFrom = root.getString("mail.from");
+            email.addFrom(mailFrom);
+            email.setSubject(envelop.subject);
+            for (String toEmail : envelop.toEmails) {
+                email.addRecipient(toEmail);
+                Logger.debug("Mail.sendMail: Mail will be sent to " + toEmail);
+            }
+
+            final String mailSign = root.getString("mail.sign");
+            email.send(envelop.message + "\n\n " + mailSign,
+                    envelop.message + "<br><br>--<br>" + mailSign);
+
+            Logger.debug("Mail sent - SMTP:" + root.getString("smtp.host")
+                    + ":" + root.getString("smtp.port")
+                    + " SSL:" + root.getString("smtp.ssl")
+                    + " user:" + root.getString("smtp.user")
+                    + " password:" + root.getString("smtp.password"));
+        }
     }
 }

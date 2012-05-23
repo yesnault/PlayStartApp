@@ -52,5 +52,8 @@ mail.reset.ask.subject=Play20StartApp - New password
 # Cannot use You've unescaped here, as the single quote stops the {0}
 mail.reset.ask.message=You asked for your password to be reset.  <br> Click on this link : {0} to change your password.
 
+mail.reset.fail.subject=Account Access Attempted
+mail.reset.fail.message=You (or someone else) entered this email address when trying to change the password.  However, this email address is not on our list of registered users, and so the attempted password reset has failed.
+
 mail.reset.confirm.subject=Play20StartApp - New password
 mail.reset.confirm.message=Your password has been reset.
