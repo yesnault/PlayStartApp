@@ -70,10 +70,14 @@ public class Reset extends Controller {
         User user = User.findByEmail(email);
         Logger.debug("runAsk: user = " + user);
 
+        // If we do not have this email address in the list, we should not expose this to the user.
+        // This exposes that the user has an account, allowing a user enumeration attack.
+        // See http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html for details.
+        // Instead, email the person saying that the reset failed.
         if (user == null) {
             Logger.debug("No user found with email " + email);
-            flash("error", Messages.get("error.notfound"));
-            return badRequest(ask.render(askForm));
+            sendFailedPasswordResetAttempt(email);
+            return ok(runAsk.render());
         }
 
         Logger.debug("Sending password reset link to user " + user);
@@ -81,10 +85,6 @@ public class Reset extends Controller {
         try {
             sendMailPasswordResetLink(user);
             return ok(runAsk.render());
-        } catch (EmailException e) {
-            Logger.debug("Cannot send email", e);
-            flash("error", Messages.get("error.sending.email"));
-            return badRequest(ask.render(askForm));
         } catch (MalformedURLException e) {
             Logger.error("Cannot validate URL", e);
             flash("error", Messages.get("error.technical"));
@@ -93,12 +93,24 @@ public class Reset extends Controller {
     }
 
     /**
+     * Sends an email to say that the password reset was to an invalid email.
+     *
+     * @param email the email address to send to.
+     */
+    private static void sendFailedPasswordResetAttempt(String email) {
+        String subject = Messages.get("mail.reset.fail.subject");
+        String message = Messages.get("mail.reset.fail.message", email);
+
+        Mail.Envelop envelop = new Mail.Envelop(subject, message, email);
+        Mail.sendMail(envelop);
+    }
+
+    /**
      * Send the Email to confirm ask new password.
      *
-     * @throws org.apache.commons.mail.EmailException
-     *          Exception when sending mail
+     * @throws MalformedURLException if token is wrong.
      */
-    private static void sendMailPasswordResetLink(User user) throws EmailException, MalformedURLException {
+    private static void sendMailPasswordResetLink(User user) throws MalformedURLException {
         String subject = Messages.get("mail.reset.ask.subject");
 
         ResetToken resetToken = new ResetToken();
