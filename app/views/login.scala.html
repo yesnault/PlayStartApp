@@ -5,10 +5,7 @@
 
 <h3>@Messages("signin.signin")</h3>
 
-
 @form(routes.Application.authenticate(), 'class -> "form-vertical") {
-
-    @wflash()
 
     @if(loginForm.hasGlobalErrors) {
         <p class="error">
@@ -32,7 +29,7 @@
     </fieldset>
 
     <div class="actions">
-        <input type="submit" class="btn-primary" value="@Messages("signin.signin")">
+        <input type="submit" class="btn btn-primary" value="@Messages("signin.signin")">
         <small><a href="@controllers.account.routes.Reset.ask">@Messages("forgot.password")</a></small>
     </div>
 }

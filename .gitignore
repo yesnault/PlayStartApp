@@ -11,3 +11,4 @@ db
 .settings
 out
 conf/mail.conf
+conf/evolutions

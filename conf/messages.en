@@ -31,9 +31,6 @@ forgot.password=Forgot password ?
 signup.signup=Sign Up
 signup.successfull=Sign Up - Successful !
 signup.new=New ?
-signup.valid.email=Please choose a valid Email
-signup.valid.fullname=Please choose a valid Full Name
-signup.valid.password=Please choose a Password
 signup.reset.password=Reset your password
 signup.msg.created=You will receive a confirmation email soon. Check your email to activate your account.
 

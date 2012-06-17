@@ -39,7 +39,7 @@ public class Reset extends Controller {
 
     public static class ResetForm {
         @Constraints.Required
-        public String password;
+        public String inputPassword;
     }
 
     /**
@@ -192,7 +192,7 @@ public class Reset extends Controller {
                 return badRequest(reset.render(resetForm, token));
             }
 
-            String password = resetForm.get().password;
+            String password = resetForm.get().inputPassword;
             user.changePassword(password);
 
             // Send email saying that the password has just been changed.

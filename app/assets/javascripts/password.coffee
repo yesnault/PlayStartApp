@@ -45,7 +45,7 @@ $.fn.passwordStrength = (options) ->
       t = Math.floor(s / p)
       t = @opts.classes.length - 1  if 100 <= s
       @div.removeAttr("class").addClass(@defaultClass).addClass @opts.classes[t]
-    ).after("<a href=\"#\">Generate Password</a>").next().click(->
+    ).after("<i class=\"icon-refresh pointer\"></i>").next().click(->
       $(this).prev().val(randomPassword()).trigger "keyup"
       false
     )
@@ -57,7 +57,7 @@ $.fn.passwordStrength.defaults =
   cache: {}
 
 $(document).ready ->
-  $("input[name=\"password\"]").passwordStrength()
+  $("input[name=\"inputPassword\"]").passwordStrength()
   $("input[name=\"passwordGenerated\"]").passwordStrength
     targetDiv: "#passwordStrengthDiv2"
     classes: Array("is10", "is20", "is30", "is40")

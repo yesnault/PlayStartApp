@@ -1,5 +1,31 @@
 title=Play20StartApp
 
+# Default messages
+
+# --- Constraints
+constraint.required=Obligatoire
+constraint.min=Valeur minimum : {0}
+constraint.max=Valeur maximum : {0}
+constraint.minLength=Longueur minimum: {0}
+constraint.maxLength=Longueur maximum: {0}
+constraint.email=Email
+
+# --- Formats
+format.date=Date (''{0}'')
+format.numeric=Numeric
+
+# --- Errors
+error.invalid=Valeur invalide
+error.required=Ce champ est obligatoire
+error.number=Valeur numérique attendue
+error.min=Doit être supérieur ou égal à {0}
+error.max=Doit être inférieur ou égal à {0}
+error.minLength=Longueur minimum autorisée : {0}
+error.maxLength=Longueur maximum autorisée : {0}
+error.email=Email valide obligatoire
+error.pattern=Doit respecter {0}
+
+
 confirm=Confirmation
 email=Adresse mail
 fullname=Nom Complet
@@ -31,15 +57,12 @@ forgot.password=Mot de passe oublié ?
 signup.signup=Inscription
 signup.successfull=Inscription réussie !
 signup.new=Nouveau ?
-signup.valid.email=Merci de choisir une adresse mail valide
-signup.valid.fullname=Merci de choisir un nom complet valide
-signup.valid.password=Merci de choisir un mot de passe valide
 signup.reset.password=Ré-initialisation de votre mot de passe
 signup.msg.created=Vous allez recevoir un mail de confirmation. Merci de vérifier vos emails.
 
 resetpassword=Ré-initialisation de votre mot de passe
 resetpassword.mailsent=Un mail a été envoyé. Merci de vérifier vos mails.
-resetpassword.success=Un nouveau mot de passe vous a été enregistré.
+resetpassword.success=Votre nouveau mot de passe est enregistré.
 resetpassword.new.password=Nouveau mot de passe :
 
 mail.confirm.subject=Bienvenue sur Play20StartApp - Demande de confirmation

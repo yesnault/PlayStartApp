@@ -87,7 +87,7 @@ public class Application extends Controller {
         public String fullname;
 
         @Constraints.Required
-        public String password;
+        public String inputPassword;
 
         /**
          * Validate the authentication.
@@ -103,7 +103,7 @@ public class Application extends Controller {
                 return "Full name is required";
             }
 
-            if (isBlank(password)) {
+            if (isBlank(inputPassword)) {
                 return "Password is required";
             }
 

@@ -34,8 +34,16 @@ public class Signup extends Controller {
      * @return create form
      */
     public static Result create() {
-        Form<Application.Register> userForm = form(Application.Register.class);
-        return ok(create.render(userForm));
+        return ok(create.render(form(Application.Register.class)));
+    }
+
+    /**
+     * Display the create form only (for the index page).
+     *
+     * @return create form
+     */
+    public static Result createFormOnly() {
+        return ok(create.render(form(Application.Register.class)));
     }
 
     /**
@@ -61,7 +69,7 @@ public class Signup extends Controller {
             User user = new User();
             user.email = register.email;
             user.fullname = register.fullname;
-            user.passwordHash = Hash.createPassword(register.password);
+            user.passwordHash = Hash.createPassword(register.inputPassword);
             user.confirmationToken = UUID.randomUUID().toString();
 
             user.save();
