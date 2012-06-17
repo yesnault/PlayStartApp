@@ -39,7 +39,7 @@ signup.msg.created=You will receive a confirmation email soon. Check your email 
 
 resetpassword=Reset Password
 resetpassword.mailsent=A mail has been sent, please check your mail.
-resetpassword.success=A new password has been sent. Please check your mail.
+resetpassword.success=Your password has been reset.
 resetpassword.new.password=New password :
 
 mail.confirm.subject=Welcome to Play20StartApp - Ask for confirmation
@@ -56,4 +56,4 @@ mail.reset.fail.subject=Account Access Attempted
 mail.reset.fail.message=You (or someone else) entered this email address when trying to change the password.  However, this email address is not on our list of registered users, and so the attempted password reset has failed.
 
 mail.reset.confirm.subject=Play20StartApp - New password
-mail.reset.confirm.message=Your password has been reset.
+mail.reset.confirm.message=Hello, <br><br> Your password has been reset.

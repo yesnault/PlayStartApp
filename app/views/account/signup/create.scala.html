@@ -11,23 +11,25 @@
 
 <fieldset>
     @inputText(
-    signupForm("email"),
-    'placeholder -> Messages("email"),
-    '_label -> null,
-    '_help -> Messages("signup.valid.email")
+        signupForm("email"),
+        'placeholder -> Messages("email"),
+        '_label -> null
     )
     @inputText(
-    signupForm("fullname"),
-    'placeholder -> Messages("fullname"),
-    '_label -> null,
-    '_help -> Messages("signup.valid.fullname")
+        signupForm("fullname"),
+        'placeholder -> Messages("fullname"),
+        '_label -> null
     )
     @inputPassword(
-    signupForm("password"),
-    '_label -> null,
-    'placeholder -> Messages("password"),
-    '_help -> Messages("signup.valid.password")
+        signupForm("password"),
+        '_label -> null,
+        'placeholder -> Messages("password")
     )
+    <div id="passwordStrengthDiv" class="is0"></div>
+
+    <input type="text" name="passwordGenerated">
+    <div id="passwordStrengthDiv2" class="is0"></div>
+
 </fieldset>
 
 <div class="actions">

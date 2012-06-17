@@ -3,8 +3,11 @@
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
+@scripts = {
+    <script src="@routes.Assets.at("javascripts/password.js")" type="text/javascript"></script>
+}
 
-@main() {
+@main(null, scripts) {
 
     <h3>@Messages("signup.reset.password")</h3>
 
@@ -15,10 +18,16 @@
 
         <fieldset>
             @inputPassword(
-            resetForm("password"),
-            'placeholder -> Messages("password"),
-            '_label -> null
+                resetForm("password"),
+                'placeholder -> Messages("password"),
+                '_label -> null
             )
+
+            <div id="passwordStrengthDiv" class="is0"></div>
+
+            <input type="text" name="passwordGenerated">
+            <div id="passwordStrengthDiv2" class="is0"></div>
+
         </fieldset>
 
         <div class="form-actions">
@@ -26,6 +35,4 @@
             <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
         </div>
     }
-
-
 }

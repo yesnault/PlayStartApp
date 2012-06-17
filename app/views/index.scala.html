@@ -1,11 +1,15 @@
 @(signupForm: Form[Application.Register], loginForm: Form[Application.Login])
 
-@main() {
+@scripts = {
+    <script src="@routes.Assets.at("javascripts/password.js")" type="text/javascript"></script>
+}
+
+@main(null, scripts) {
   <div class="span3">
     &nbsp;
   </div>
 
-  <div class="span5">
+  <div class="span12">
     <div class="well">
       @login(loginForm)
     </div>

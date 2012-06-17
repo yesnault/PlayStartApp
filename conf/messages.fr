@@ -39,7 +39,7 @@ signup.msg.created=Vous allez recevoir un mail de confirmation. Merci de vérifi
 
 resetpassword=Ré-initialisation de votre mot de passe
 resetpassword.mailsent=Un mail a été envoyé. Merci de vérifier vos mails.
-resetpassword.success=Un nouveau mot de passe vous a été envoyé. Merci de vérifier vos mails.
+resetpassword.success=Un nouveau mot de passe vous a été enregistré.
 resetpassword.new.password=Nouveau mot de passe :
 
 mail.confirm.subject=Bienvenue sur Play20StartApp - Demande de confirmation
