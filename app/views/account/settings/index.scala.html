@@ -1,7 +1,22 @@
-@(user: User)
+@(user: User)(content: Html)
 
 @main(user) {
 
-Example page settings
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="@controllers.account.routes.Settings.password">@Messages("password")</a>
+                </li>
+            </ul>
+        </div>
+        <div class="span10">
+            @content
+        </div>
+    </div>
+</div>
+
 
 }

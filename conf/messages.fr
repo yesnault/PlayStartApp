@@ -48,6 +48,8 @@ error.unknown.email=Adresse mail inconnue
 error.confirm=Error lors de la confirmation de votre inscription
 error.expiredresetlink=Cette demande de ré-initialisation de mot de passe est périmée.
 
+account.settings.password=Cliquer sur Valider pour recevoir les instructions par mail.
+
 signin.signin=Se Connecter
 signin.your.email=Votre adresse mail
 signin.your.password=Votre mot de passe

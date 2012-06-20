@@ -22,6 +22,8 @@ error.unknown.email=Unknown email
 error.confirm=Confirmation failed
 error.expiredresetlink=This password reset has expired.
 
+account.settings.password=Click OK to receive instructions by mail.
+
 signin.signin=Sign In
 signin.your.email=Your email address
 signin.your.password=Your password

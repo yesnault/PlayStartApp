@@ -1,11 +1,11 @@
 package controllers.account;
 
 import models.ResetToken;
+import models.ResetWork;
 import models.User;
 import models.utils.AppException;
 import models.utils.Mail;
 import org.apache.commons.mail.EmailException;
-import play.Configuration;
 import play.Logger;
 import play.data.Form;
 import play.data.validation.Constraints;
@@ -17,8 +17,6 @@ import views.html.account.reset.reset;
 import views.html.account.reset.runAsk;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.UUID;
 
 /**
  * ResetToken password :
@@ -83,7 +81,7 @@ public class Reset extends Controller {
         Logger.debug("Sending password reset link to user " + user);
 
         try {
-            sendMailPasswordResetLink(user);
+            ResetWork.sendMailPasswordResetLink(user);
             return ok(runAsk.render());
         } catch (MalformedURLException e) {
             Logger.error("Cannot validate URL", e);
@@ -104,33 +102,6 @@ public class Reset extends Controller {
         Mail.Envelop envelop = new Mail.Envelop(subject, message, email);
         Mail.sendMail(envelop);
     }
-
-    /**
-     * Send the Email to confirm ask new password.
-     *
-     * @throws MalformedURLException if token is wrong.
-     */
-    private static void sendMailPasswordResetLink(User user) throws MalformedURLException {
-        String subject = Messages.get("mail.reset.ask.subject");
-
-        ResetToken resetToken = new ResetToken();
-        resetToken.token = UUID.randomUUID().toString();
-        resetToken.userId = user.id;
-        resetToken.save();
-
-        String externalServer = Configuration.root().getString("server.hostname");
-
-        // Should use reverse routing here.
-        String urlString = "http://" + externalServer + "/reset/" + resetToken.token;
-        URL url = new URL(urlString); // validate the URL
-        Logger.debug("sendMailPasswordResetLink: url = " + url);
-        String message = Messages.get("mail.reset.ask.message", url.toString());
-        Logger.debug("sendMailPasswordResetLink: message = " + message);
-
-        Mail.Envelop envelop = new Mail.Envelop(subject, message, user.email);
-        Mail.sendMail(envelop);
-    }
-
 
     public static Result reset(String token) {
 

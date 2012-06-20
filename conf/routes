@@ -10,6 +10,8 @@ POST    /login                      controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 
 GET     /settings                   controllers.account.Settings.index()
+GET     /settings/password          controllers.account.Settings.password()
+POST    /settings/password          controllers.account.Settings.runPassword()
 
 # Registers the user, sending an email to confirm the account.
 GET     /signup                     controllers.account.Signup.create()
