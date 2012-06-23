@@ -6,13 +6,18 @@ This is a sample application using Play Framework 2.0
 * Sign Up
 * Sign In
 * Reset password
+* Settings Page
+* Change email from Settings
 
 ## Application details
 * No clear password stored in db
 * Secure workflow to reset password
+* Secure workflow to reset email
 * I18n example (en, fr)
 * Using Typesafe Plugin Mailer : https://github.com/typesafehub/play-plugins/tree/master/mailer
-* Using Twitter Bootstrap : http://twitter.github.com/bootstrap/, theme Spacelab from http://http://bootswatch.com
+* Using Twitter Bootstrap 2 : http://twitter.github.com/bootstrap/, theme Spacelab from http://http://bootswatch.com
+* Using Less and CoffeeScript
+* Using a password generator 
 
 ## Try
 * Rename conf/email.conf.example in conf/email.conf and check it (smtp, etc...)
