@@ -12,6 +12,7 @@ reset=Reset
 
 account.not.validated.check.mail=Account not validated. Check your emails.
 account.successfully.validated=Account successfully validated
+account.settings.email.successful=Email successfully validated ({0})
 invalid.user.or.password=Invalid user or password
 youve.been.logged.out=You've been logged out
 error.sending.email=Error sending email
@@ -21,8 +22,10 @@ error.account.already.validated=Account already validated
 error.unknown.email=Unknown email
 error.confirm=Confirmation failed
 error.expiredresetlink=This password reset has expired.
+error.expiredmaillink=This mail change has expired.
 
 account.settings.password=Click OK to receive instructions by mail.
+account.settings.password=Enter your new email adress. Click OK to receive instructions on this new mail.
 
 signin.signin=Sign In
 signin.your.email=Your email address
@@ -36,11 +39,14 @@ signup.new=New ?
 signup.reset.password=Reset your password
 signup.generate.password=Generate a password
 signup.msg.created=You will receive a confirmation email soon. Check your email to activate your account.
+signup.valid.email=Invalid Email
 
 resetpassword=Reset Password
 resetpassword.mailsent=A mail has been sent, please check your mail.
 resetpassword.success=Your password has been reset.
 resetpassword.new.password=New password :
+
+changemail.mailsent=A mail has been sent, please check your mail.
 
 mail.confirm.subject=Welcome to Play20StartApp - Ask for confirmation
 mail.confirm.message=Welcome to Play20StartApp. <br> Click on this link : {0} to confirm your email.
@@ -51,6 +57,9 @@ mail.welcome.message=Welcome to Play20StartApp. <br> Your account is validated. 
 mail.reset.ask.subject=Play20StartApp - New password
 # Cannot use You've unescaped here, as the single quote stops the {0}
 mail.reset.ask.message=You asked for your password to be reset.  <br> Click on this link : {0} to change your password.
+
+mail.change.ask.subject=Play20StartApp - Validate email
+mail.change.ask.message=You asked for your email to be changed.  <br> Click on this link : {0} to validate your email.
 
 mail.reset.fail.subject=Account Access Attempted
 mail.reset.fail.message=You (or someone else) entered this email address when trying to change the password.  However, this email address is not on our list of registered users, and so the attempted password reset has failed.

@@ -9,9 +9,11 @@ GET     /dashboard                  controllers.Dashboard.index()
 POST    /login                      controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 
-GET     /settings                   controllers.account.Settings.index()
-GET     /settings/password          controllers.account.Settings.password()
-POST    /settings/password          controllers.account.Settings.runPassword()
+GET     /settings                   controllers.account.settings.Index.index()
+GET     /settings/password          controllers.account.settings.Password.index()
+POST    /settings/password          controllers.account.settings.Password.runPassword()
+GET     /settings/email             controllers.account.settings.Email.index()
+POST    /settings/email             controllers.account.settings.Email.runEmail()
 
 # Registers the user, sending an email to confirm the account.
 GET     /signup                     controllers.account.Signup.create()
@@ -25,8 +27,10 @@ GET     /reset/ask                  controllers.account.Reset.ask()
 POST    /reset/ask                  controllers.account.Reset.runAsk()
 
 # Resets the password using the password.
-GET     /reset/:resetToken          controllers.account.Reset.reset(resetToken:String)
-POST    /reset/:resetToken          controllers.account.Reset.runReset(resetToken:String)
+GET     /reset/:token          controllers.account.Reset.reset(token:String)
+POST    /reset/:token          controllers.account.Reset.runReset(token:String)
+
+GET     /email/:token          controllers.account.settings.Email.validateEmail(token:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

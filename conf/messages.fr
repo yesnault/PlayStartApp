@@ -25,7 +25,6 @@ error.maxLength=Longueur maximum autorisée : {0}
 error.email=Email valide obligatoire
 error.pattern=Doit respecter {0}
 
-
 confirm=Confirmation
 email=Adresse mail
 fullname=Nom Complet
@@ -38,6 +37,7 @@ reset=Valider
 
 account.not.validated.check.mail=Votre compte n'est pas validé, vérifiez vos emails...
 account.successfully.validated=Votre compte est validé
+account.settings.email.successful=Votre nouvelle adresse mail ({0}) est validée
 invalid.user.or.password=Utilisateur ou mot de passe invalide
 youve.been.logged.out=Vous avez été déconnecté
 error.sending.email=Erreur lors de l'envoi du mail
@@ -47,8 +47,10 @@ error.account.already.validated=Votre compte est déjà validé
 error.unknown.email=Adresse mail inconnue
 error.confirm=Error lors de la confirmation de votre inscription
 error.expiredresetlink=Cette demande de ré-initialisation de mot de passe est périmée.
+error.expiredmaillink=Cette demande de ré-initialisation d'adresse mail est périmée.
 
-account.settings.password=Cliquer sur Valider pour recevoir les instructions par mail.
+account.settings.password=Cliquez sur Valider pour recevoir les instructions par mail.
+account.settings.email=Entrez votre nouvelle adresse mail et Valider pour recevoir les instructions par mail.
 
 signin.signin=Se Connecter
 signin.your.email=Votre adresse mail
@@ -62,11 +64,14 @@ signup.new=Nouveau ?
 signup.reset.password=Ré-initialisation de votre mot de passe
 signup.generate.password=Générer un mot de passe
 signup.msg.created=Vous allez recevoir un mail de confirmation. Merci de vérifier vos emails.
+signup.valid.email=Adresse invalide
 
 resetpassword=Ré-initialisation de votre mot de passe
 resetpassword.mailsent=Un mail a été envoyé. Merci de vérifier vos mails.
 resetpassword.success=Votre nouveau mot de passe est enregistré.
 resetpassword.new.password=Nouveau mot de passe :
+
+changemail.mailsent=Un mail a été envoyé. Merci de vérifier vos mails.
 
 mail.confirm.subject=Bienvenue sur Play20StartApp - Demande de confirmation
 mail.confirm.message=Bienvenue to Play20StartApp. <br><br> Cliquez sur ce lien : {0} pour confirmer votre email.
@@ -76,6 +81,10 @@ mail.welcome.message=Bienvenue sur Play20StartApp. <br><br> Votre compte est val
 
 mail.reset.ask.subject=Play20StartApp - Changement de mot de passe ?
 mail.reset.ask.message=Bonjour, <br><br> Cliquez ici : {0} pour confirmer votre demande de changement de mot de passe.
+
+mail.change.ask.subject=Play20StartApp - Changement d''adresse email
+mail.change.ask.message=Bonjour, <br><br> Cliquez ici : {0} pour confirmer votre changement d''adresse mail.
+
 
 mail.reset.fail.subject=Tentative d'accès à votre compte
 mail.reset.fail.message=Bonjour, <br><br> Vous (ou quelqu'un d'autre) a saisi votre adresse e-mail pour tenter de changer votre mot de passe. Cette adresse e-mail n'est pas sur notre liste des utilisateurs enregistrés, la tentative de ré-initialisation de mot de passe a donc échoué.

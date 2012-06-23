@@ -1,7 +1,6 @@
 package controllers.account;
 
-import models.ResetToken;
-import models.ResetWork;
+import models.Token;
 import models.User;
 import models.utils.AppException;
 import models.utils.Mail;
@@ -19,11 +18,11 @@ import views.html.account.reset.runAsk;
 import java.net.MalformedURLException;
 
 /**
- * ResetToken password :
+ * Token password :
  * - ask for an email address.
  * - send a link pointing them to a reset page.
  * - show the reset page and set them reset it.
- *
+ * <p/>
  * <p/>
  * User: yesnault
  * Date: 20/01/12
@@ -81,7 +80,7 @@ public class Reset extends Controller {
         Logger.debug("Sending password reset link to user " + user);
 
         try {
-            ResetWork.sendMailPasswordResetLink(user);
+            Token.sendMailResetPassword(user);
             return ok(runAsk.render());
         } catch (MalformedURLException e) {
             Logger.error("Cannot validate URL", e);
@@ -111,7 +110,7 @@ public class Reset extends Controller {
             return badRequest(ask.render(askForm));
         }
 
-        ResetToken resetToken = ResetToken.findByToken(token);
+        Token resetToken = Token.findByTokenAndType(token, Token.TypeToken.password);
         if (resetToken == null) {
             flash("error", Messages.get("error.technical"));
             Form<AskForm> askForm = form(AskForm.class);
@@ -130,7 +129,6 @@ public class Reset extends Controller {
     }
 
     /**
-     *
      * @return reset password form
      */
     public static Result runReset(String token) {
@@ -142,10 +140,10 @@ public class Reset extends Controller {
         }
 
         try {
-            ResetToken resetToken = ResetToken.findByToken(token);
+            Token resetToken = Token.findByTokenAndType(token, Token.TypeToken.password);
             if (resetToken == null) {
-              flash("error", Messages.get("error.technical"));
-              return badRequest(reset.render(resetForm, token));
+                flash("error", Messages.get("error.technical"));
+                return badRequest(reset.render(resetForm, token));
             }
 
             if (resetToken.isExpired()) {
@@ -156,7 +154,7 @@ public class Reset extends Controller {
 
             // check email
             User user = User.find.byId(resetToken.userId);
-            if (user == null)   {
+            if (user == null) {
                 // display no detail (email unknown for example) to
                 // avoir check email by foreigner
                 flash("error", Messages.get("error.technical"));
@@ -183,7 +181,7 @@ public class Reset extends Controller {
     /**
      * Send mail with the new password.
      *
-     * @param user          user created
+     * @param user user created
      * @throws EmailException Exception when sending mail
      */
     private static void sendPasswordChanged(User user) throws EmailException {

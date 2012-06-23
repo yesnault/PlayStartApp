@@ -91,7 +91,7 @@ public class Signup extends Controller {
      *
      * @param registerForm User Form submitted
      * @param email email address
-     * @return Result if there was a problem, null otherwise
+     * @return Index if there was a problem, null otherwise
      */
     private static Result checkBeforeSave(Form<Application.Register> registerForm, String email) {
         // Check unique email

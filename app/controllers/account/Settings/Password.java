@@ -1,7 +1,7 @@
-package controllers.account;
+package controllers.account.settings;
 
 import controllers.Secured;
-import models.ResetWork;
+import models.Token;
 import models.User;
 import play.Logger;
 import play.i18n.Messages;
@@ -17,23 +17,14 @@ import java.net.MalformedURLException;
  * Date: 15/05/12
  */
 @Security.Authenticated(Secured.class)
-public class Settings extends Controller {
-
-    /**
-     * Main page Settings
-     *
-     * @return index Settings
-     */
-    public static Result index() {
-        return password();
-    }
+public class Password extends Controller {
 
     /**
      * Password Page. Ask the user to change his password.
      *
-     * @return Password Page
+     * @return index settings
      */
-    public static Result password() {
+    public static Result index() {
         return ok(password.render(User.findByEmail(request().username())));
     }
 
@@ -45,7 +36,7 @@ public class Settings extends Controller {
     public static Result runPassword() {
         User user = User.findByEmail(request().username());
         try {
-            ResetWork.sendMailPasswordResetLink(user);
+            Token.sendMailResetPassword(user);
             flash("success", Messages.get("resetpassword.mailsent"));
             return ok(password.render(user));
         } catch (MalformedURLException e) {
