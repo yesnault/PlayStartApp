@@ -35,7 +35,8 @@ $.fn.passwordStrength = (options) ->
     that = this
     that.opts = {}
     that.opts = $.extend({}, $.fn.passwordStrength.defaults, options)
-    that.div = $(that.opts.targetDiv)
+    that.div = $("<div id="+that.opts.targetDiv+" class=\"is0\"></div>")
+    $(this).parent().after(that.div)
     that.defaultClass = that.div.attr("class")
     that.percents = (if (that.opts.classes.length) then 100 / that.opts.classes.length else 100)
     v = $(this).keyup(->
@@ -45,19 +46,23 @@ $.fn.passwordStrength = (options) ->
       t = Math.floor(s / p)
       t = @opts.classes.length - 1  if 100 <= s
       @div.removeAttr("class").addClass(@defaultClass).addClass @opts.classes[t]
-    ).after("<i class=\"icon-refresh pointer\"></i>").next().click(->
-      $(this).prev().val(randomPassword()).trigger "keyup"
-      false
     )
+
+    if (@opts.displayRefresh)
+        $(this).after("<i class=\"icon-refresh pointer\"></i>").next().click(->
+            $(this).prev().val(randomPassword()).trigger "keyup"
+            false
+        )
   )
 
 $.fn.passwordStrength.defaults =
   classes: Array("is10", "is20", "is30", "is40", "is50", "is60", "is70", "is80", "is90", "is100")
   targetDiv: "#passwordStrengthDiv"
+  displayRefresh: false
   cache: {}
 
 $(document).ready ->
   $("input[name=\"inputPassword\"]").passwordStrength()
   $("input[name=\"passwordGenerated\"]").passwordStrength
     targetDiv: "#passwordStrengthDiv2"
-    classes: Array("is10", "is20", "is30", "is40")
+    displayRefresh: true

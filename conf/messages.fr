@@ -60,6 +60,7 @@ signup.signup=Inscription
 signup.successfull=Inscription réussie !
 signup.new=Nouveau ?
 signup.reset.password=Ré-initialisation de votre mot de passe
+signup.generate.password=Générer un mot de passe
 signup.msg.created=Vous allez recevoir un mail de confirmation. Merci de vérifier vos emails.
 
 resetpassword=Ré-initialisation de votre mot de passe

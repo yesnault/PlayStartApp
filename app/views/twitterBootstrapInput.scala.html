@@ -7,9 +7,9 @@
   <label class="control-label" for="@elements.id">@elements.label</label>
   <div class="controls">
     @elements.input
-    <p class="help-block">@elements.infos.mkString(", ")</p>
+    <p class="help-inline">@elements.infos.mkString(", ")</p>
     @if(elements.hasErrors) {
-    <p class="help-block">@elements.errors.mkString(", ")</p>
+    <p class="help-inline">@elements.errors.mkString(", ")</p>
     }
   </div>
 </div>
