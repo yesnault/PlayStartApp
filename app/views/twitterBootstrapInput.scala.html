@@ -1,12 +1,15 @@
 @(elements: helper.FieldElements)
 
-@**************************************************
-* Generate input according twitter bootstrap rules *
-**************************************************@
-<div class="clearfix @if(elements.hasErrors) {error}">
-    <label for="@elements.id">@elements.label</label>
-    <div class="input">
-        @elements.input
-        <span class="help-inline">@elements.infos.mkString(", ")</span>
-    </div>
+@*
+ * Generate input according twitter bootstrap 2.0 rules.
+ *@
+<div class="control-group @if(elements.hasErrors) {error}">
+  <label class="control-label" for="@elements.id">@elements.label</label>
+  <div class="controls">
+    @elements.input
+    <p class="help-block">@elements.infos.mkString(", ")</p>
+    @if(elements.hasErrors) {
+    <p class="help-block">@elements.errors.mkString(", ")</p>
+    }
+  </div>
 </div>
