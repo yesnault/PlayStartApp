@@ -30,7 +30,7 @@ This is a sample application using Play Framework 2.0
 * Everything you ever wanted to know about secure password reset : http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html
 
 ## Licence
-* BSD. See LICENCE file
+* BSD. See LICENSE file
 
 ## Contact
 Twitter : @yesnault
