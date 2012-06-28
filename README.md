@@ -29,6 +29,9 @@ This is a sample application using Play Framework 2.0
 * Failing with Passwords (a presentation on issues in user authentication) : http://tersesystems.com/2012/02/17/failing-with-passwords
 * Everything you ever wanted to know about secure password reset : http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html
 
+## Licence
+* BSD. See LICENCE file
+
 ## Contact
 Twitter : @yesnault
  
