@@ -23,6 +23,7 @@ This is a sample application using Play Framework 2.0
 * Rename conf/email.conf.example in conf/email.conf and check it (smtp, etc...)
 * Download Play Framework 2 from http://www.playframework.org/
 * Open a terminal in Play20StartApp directory and exec `play run`
+* Generate Scala Doc & Javadoc with exec `play app-doc` (task app-doc add in Build.scala file)
 
 ## Documentation
 * Insecure Cryptography (an explanation of good web app password practices and why they're good) : http://webapp-hardening.heroku.com/insecure_crypto
