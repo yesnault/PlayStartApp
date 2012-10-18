@@ -10,7 +10,7 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.1"
 
     val appDependencies = Seq(
-      "com.typesafe" %% "play-plugins-mailer" % "2.0.2",
+      "com.typesafe" %% "play-plugins-mailer" % "2.0.4",
       "org.mindrot" % "jbcrypt" % "0.3m"
     )
 
