@@ -33,9 +33,6 @@ This is a sample application using Play Framework 2.0
 ## Promotion
 * You can vote for this application on http://www.playmodules.net/demo/14
 
-## Deploy on a Cloud
-* Example with Cloudbees, see Readme on branch Cloudbees : https://github.com/yesnault/Play20StartApp/tree/cloudbees
-
 ## Licence
 * BSD. See LICENSE file
 
