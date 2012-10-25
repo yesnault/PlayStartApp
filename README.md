@@ -36,7 +36,7 @@ This is a sample application using Play Framework 2.0
 ## Licence
 * BSD. See LICENSE file
 
-## Deploiement Cloudbees
+## Deploiement on Cloudbees
 
 * Read Cloudbees Documentation : http://developer.cloudbees.com/bin/view/RUN/Playframework 
 * You can now install the plugin cloudbees-deploy and configure sendGrid on your cloudbees account in order to send mail with this service
@@ -56,9 +56,15 @@ This is a sample application using Play Framework 2.0
     bees db:create DB_NAME
 </code></pre>
 
-* Deploy the application
+* Deploy the application with play console
 <pre><code>
-    $ play cloudbees-deploy
+    $ play 
+    > cloudbees-deploy-config cloudbees APP_NAME
+</code></pre>
+Example with APP_NAME = Play20StartApp : 
+<pre><code>
+    $ play 
+    > cloudbees-deploy-config cloudbees Play20StartApp
 </code></pre>
 
 * Bind database to the application
