@@ -39,7 +39,7 @@ This is a sample application using Play Framework 2.0
 ## Deploiement on a Cloud
 ### Cloudbees
 * Online demo : http://play20startapp.yesnault.cloudbees.net/
-* Online Source of this CloudBees Demo : https://github.com/yesnault/Play20StartApp/tree/cloudbees
+* Online Source of this CloudBees Demo : https://github.com/yesnault/Play20StartApp/tree/cloudbees (see README : https://github.com/yesnault/Play20StartApp/tree/cloudbees#deploiement-on-cloudbees)
 
 ## Contact
 Twitter : @yesnault
