@@ -1,7 +1,6 @@
 import sbt._
 import Keys._
 import PlayProject._
-import cloudbees.Plugin._
 
 object ApplicationBuild extends Build {
 
@@ -12,8 +11,7 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       "com.typesafe" %% "play-plugins-mailer" % "2.0.4",
-      "org.mindrot" % "jbcrypt" % "0.3m",
-      "mysql" % "mysql-connector-java" % "5.1.18"
+      "org.mindrot" % "jbcrypt" % "0.3m"
     )
 
     lazy val s = Defaults.defaultSettings ++ Seq(generateAPIDocsTask)
@@ -24,11 +22,6 @@ object ApplicationBuild extends Build {
         resolvers += "Apache" at "http://repo1.maven.org/maven2/",
         resolvers += "jBCrypt Repository" at "http://repo1.maven.org/maven2/org/"   ,
         resolvers += "Sonatype OSS Snasphots" at "http://oss.sonatype.org/content/repositories/snapshots"
-      )
-      // Cloudbees
-      .settings(cloudBeesSettings :_*)
-      .settings(
-        CloudBees.applicationId := Some("Play20StartApp")
       )
 
     object Tasks {

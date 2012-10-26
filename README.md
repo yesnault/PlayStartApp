@@ -36,44 +36,8 @@ This is a sample application using Play Framework 2.0
 ## Licence
 * BSD. See LICENSE file
 
-## Deploiement on Cloudbees
-
-* Read Cloudbees Documentation : http://developer.cloudbees.com/bin/view/RUN/Playframework 
-* You can now install the plugin cloudbees-deploy and configure sendGrid on your cloudbees account in order to send mail with this service
-* Export locally fake alias, allowing Play2 compiling application.conf and mail.conf
-<pre><code>
-    $ export MYSQL_URL_DB=na
-    $ export MYSQL_USERNAME_DB=na
-    $ export MYSQL_PASSWORD_DB=na
-    $ export SENDGRID_SMTP_HOST=na
-    $ export SENDGRID_USERNAME=na
-    $ export SENDGRID_PASSWORD=na
-</code></pre>
-
-* Create the application and db on CloudBees
-<pre><code>
-    bees app:create APP_NAME
-    bees db:create DB_NAME
-</code></pre>
-
-* Deploy the application with play console
-<pre><code>
-    $ play 
-    > cloudbees-deploy-config cloudbees APP_NAME
-</code></pre>
-Example with APP_NAME = Play20StartApp : 
-<pre><code>
-    $ play 
-    > cloudbees-deploy-config cloudbees Play20StartApp
-</code></pre>
-
-* Bind database to the application
-<pre><code>
-    bees app:bind -a APP_NAME -db DB_NAME -as DB
-</code></pre>
-
-(replace APP_NAME and DB_NAME as you want, example : bees app:bin -a yesnault/Play20StartApp -db play20StartApp -as DB)
-
+## Deploiement on a Cloud
+### Cloudbees
 * Online demo : http://play20startapp.yesnault.cloudbees.net/
 * Online Source of this CloudBees Demo : https://github.com/yesnault/Play20StartApp/tree/cloudbees
 
