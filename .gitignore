@@ -4,6 +4,7 @@ project/target
 target
 tmp
 .idea
+*.iml
 Play20StartApp.iml
 db
 .classpath
