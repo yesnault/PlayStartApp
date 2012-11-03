@@ -6,6 +6,7 @@ fullname=Full Name
 goback=Go Back
 logout=Logout
 password=Password
+confirmPassword=Confirm Password
 error.technical=Technical Error, please Retry
 validate=Validate
 reset=Reset
