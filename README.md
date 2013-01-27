@@ -41,6 +41,9 @@ This is a sample application using Play Framework 2.0
 * Online demo : http://play20startapp.yesnault.cloudbees.net/
 * Online Source of this CloudBees Demo : https://github.com/yesnault/Play20StartApp/tree/cloudbees (see README : https://github.com/yesnault/Play20StartApp/tree/cloudbees#deploiement-on-cloudbees)
 
+[![Build Status](https://buildhive.cloudbees.com/job/yesnault/job/Play20StartApp/badge/icon)](https://buildhive.cloudbees.com/job/yesnault/job/Play20StartApp/)
+
+
 ## Contact
 Twitter : @yesnault
  
