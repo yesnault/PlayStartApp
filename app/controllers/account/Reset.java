@@ -17,6 +17,8 @@ import views.html.account.reset.runAsk;
 
 import java.net.MalformedURLException;
 
+import static play.data.Form.form;
+
 /**
  * Token password :
  * - ask for an email address.

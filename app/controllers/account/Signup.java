@@ -20,6 +20,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
+import static play.data.Form.form;
+
 /**
  * Signup to Play20StartApp : save and send confirm mail.
  * <p/>

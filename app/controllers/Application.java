@@ -10,6 +10,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 
+import static play.data.Form.form;
+
 /**
  * Login and Logout.
  * User: yesnault

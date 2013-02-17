@@ -1,22 +1,25 @@
 import sbt._
 import Keys._
-import PlayProject._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
     import Tasks._
 
     val appName         = "Play20StartApp"
-    val appVersion      = "1.1"
+    val appVersion      = "1.2"
 
     val appDependencies = Seq(
-      "com.typesafe" %% "play-plugins-mailer" % "2.0.4",
-      "org.mindrot" % "jbcrypt" % "0.3m"
+      javaCore,
+      javaJdbc,
+      "com.typesafe" %% "play-plugins-mailer" % "2.1.0",
+      "org.mindrot" % "jbcrypt" % "0.3m",
+      javaEbean
     )
 
     lazy val s = Defaults.defaultSettings ++ Seq(generateAPIDocsTask)
 
-    val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA, settings = s)
+    val main = play.Project(appName, appVersion, appDependencies)
       .settings(
         // Add your own project settings here
         resolvers += "Apache" at "http://repo1.maven.org/maven2/",
@@ -30,7 +33,7 @@ object ApplicationBuild extends Build {
         
           IO.delete(file("documentation/api"))
           // Scaladoc
-          var scalaVersionForSbt = Option(System.getProperty("scala.version")).getOrElse("2.9.1")
+          var scalaVersionForSbt = Option(System.getProperty("scala.version")).getOrElse("2.10.0")
 
           val sourceFiles = 
             (file("app") ** "*.scala").get ++ 

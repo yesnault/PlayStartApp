@@ -1,25 +1,17 @@
 package models.utils;
 
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.dispatch.ExecutionContextExecutorService;
-import akka.dispatch.*;
-import akka.util.Duration;
-import akka.util.FiniteDuration;
-import akka.util.Timeout;
-
-import akka.dispatch.ExecutionContexts;
-import akka.dispatch.ExecutionContextExecutorService;
-
 import com.typesafe.plugin.MailerAPI;
 import com.typesafe.plugin.MailerPlugin;
 import play.Configuration;
 import play.Logger;
 import play.libs.Akka;
+import scala.concurrent.duration.Duration;
+import scala.concurrent.duration.FiniteDuration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * Send a mail with Play20StartApp.
@@ -69,7 +61,7 @@ public class Mail {
     public static void sendMail(Mail.Envelop envelop) {
         EnvelopJob envelopJob = new EnvelopJob(envelop);
         final FiniteDuration delay = Duration.create(DELAY, TimeUnit.SECONDS);
-        Akka.system().scheduler().scheduleOnce(delay, envelopJob);
+        Akka.system().scheduler().scheduleOnce(delay,envelopJob, Akka.system().dispatcher());
     }
 
     static class EnvelopJob implements Runnable {

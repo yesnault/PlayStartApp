@@ -15,6 +15,8 @@ import views.html.account.settings.emailValidate;
 
 import java.net.MalformedURLException;
 
+import static play.data.Form.form;
+
 /**
  * Settings -> Email page.
  * <p/>

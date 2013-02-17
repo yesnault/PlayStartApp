@@ -1,6 +1,6 @@
 # Play20StartApp
 
-This is a sample application using Play Framework 2.0
+This is a sample application using Play Framework 2.0 and Play Framework 2.1 (See tags https://github.com/yesnault/Play20StartApp/tags for download)
 
 ## Features
 * Sign Up
