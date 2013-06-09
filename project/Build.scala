@@ -25,7 +25,10 @@ object ApplicationBuild extends Build {
         resolvers += "Apache" at "http://repo1.maven.org/maven2/",
         resolvers += "jBCrypt Repository" at "http://repo1.maven.org/maven2/org/"   ,
         resolvers += "Sonatype OSS Snasphots" at "http://oss.sonatype.org/content/repositories/snapshots"
-      )
+      ).settings(generateAPIDocsTask)
+
+    //val main = play.Project(appName, appVersion, appDependencies, settings = Defaults.defaultSettings ++ Seq(generateAPIDocsTask))
+
 
     object Tasks {
 
