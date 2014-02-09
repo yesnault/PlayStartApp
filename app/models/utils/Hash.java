@@ -27,7 +27,7 @@ public class Hash {
     }
 
     /**
-     * @param candidate the clear text
+     * @param candidate         the clear text
      * @param encryptedPassword the encrypted password string to check.
      * @return true if the candidate matches, false otherwise.
      */

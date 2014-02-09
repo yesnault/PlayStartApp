@@ -21,7 +21,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class Mail {
 
-    /** 1 second delay on sending emails */
+    /**
+     * 1 second delay on sending emails
+     */
     private static final int DELAY = 1;
 
     /**
@@ -61,7 +63,7 @@ public class Mail {
     public static void sendMail(Mail.Envelop envelop) {
         EnvelopJob envelopJob = new EnvelopJob(envelop);
         final FiniteDuration delay = Duration.create(DELAY, TimeUnit.SECONDS);
-        Akka.system().scheduler().scheduleOnce(delay,envelopJob, Akka.system().dispatcher());
+        Akka.system().scheduler().scheduleOnce(delay, envelopJob, Akka.system().dispatcher());
     }
 
     static class EnvelopJob implements Runnable {
@@ -76,10 +78,10 @@ public class Mail {
 
             final Configuration root = Configuration.root();
             final String mailFrom = root.getString("mail.from");
-            email.addFrom(mailFrom);
+            email.setFrom(mailFrom);
             email.setSubject(envelop.subject);
             for (String toEmail : envelop.toEmails) {
-                email.addRecipient(toEmail);
+                email.setRecipient(toEmail);
                 Logger.debug("Mail.sendMail: Mail will be sent to " + toEmail);
             }
 

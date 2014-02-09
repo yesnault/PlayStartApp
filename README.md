@@ -1,6 +1,6 @@
 # Play20StartApp
 
-This is a sample application using Play Framework 2.0 and Play Framework 2.1 (See tags https://github.com/yesnault/Play20StartApp/tags for download)
+This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags https://github.com/yesnault/Play20StartApp/tags for download)
 
 ## Features
 * Sign Up
@@ -15,7 +15,7 @@ This is a sample application using Play Framework 2.0 and Play Framework 2.1 (Se
 * Secure workflow to reset email
 * I18n example (en, fr)
 * Using Typesafe Plugin Mailer : https://github.com/typesafehub/play-plugins/tree/master/mailer
-* Using Twitter Bootstrap 2 : http://twitter.github.com/bootstrap/, theme Spacelab from http://http://bootswatch.com
+* Using Twitter Bootstrap 3 : http://twitter.github.com/bootstrap/
 * Using Less and CoffeeScript
 * Using a password generator 
 
