@@ -5,11 +5,11 @@
 
 <h3>@Messages("signin.signin")</h3>
 
-@form(routes.Application.authenticate(), 'class -> "form-vertical") {
+@form(routes.Application.authenticate(), 'class -> "form") {
 
     @if(loginForm.hasGlobalErrors) {
         <p class="error">
-            <span class="label important">@loginForm.globalError.message</span>
+            <span class="label label-danger">@loginForm.globalError.message</span>
         </p>
     }
 
@@ -18,13 +18,15 @@
             loginForm("email"),
             'placeholder -> Messages("email"),
             '_label -> null,
-            '_help -> Messages("signin.your.email")
+            '_help -> Messages("signin.your.email"),
+            'class -> "form-control"
         )
         @inputPassword(
             loginForm("password"),
             '_label -> null,
             'placeholder -> Messages("password"),
-            '_help -> Messages("signin.your.password")
+            '_help -> Messages("signin.your.password"),
+            'class -> "form-control"
         )
     </fieldset>
 

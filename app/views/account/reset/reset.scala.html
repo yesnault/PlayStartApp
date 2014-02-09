@@ -1,11 +1,13 @@
-@(resetForm: Form[controllers.account.Reset.ResetForm], token:String)
+@(resetForm: Form[controllers.account.Reset.ResetForm], token: String)
 
 @import helper._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+    @implicitFieldConstructor = @{
+        FieldConstructor(twitterBootstrapInput.render)
+    }
 
-@scripts = {
-    <script src="@routes.Assets.at("javascripts/password.js")" type="text/javascript"></script>
-}
+    @scripts = {
+        <script src="@routes.Assets.at("javascripts/password.js")" type="text/javascript"></script>
+    }
 
 @main(null, scripts) {
 
@@ -13,23 +15,29 @@
 
     @wflash()
 
-    @Messages("resetpassword.new.password")
-    @form(controllers.account.routes.Reset.runReset(token)) {
+    <div class="col col-lg-8">
+        @Messages("resetpassword.new.password")
 
-        <fieldset>
-            @inputPassword(
-                resetForm("inputPassword"),
-                'placeholder -> Messages("password"),
-                '_label -> null
-            )
-            <h6>@Messages("signup.generate.password")</h6>
-            <input type="text" name="passwordGenerated">
+        @form(controllers.account.routes.Reset.runReset(token)) {
 
-        </fieldset>
+            <div class="form-group">
+                @inputPassword(
+                    resetForm("inputPassword"),
+                    'placeholder -> Messages("password"),
+                    '_label -> null,
+                    'class -> "form-control"
+                )
+                <h6>@Messages("signup.generate.password")</h6>
+                <input type="text" name="passwordGenerated" class="form-control">
 
-        <div class="form-actions">
+            </div>
+
+            <hr>
+
             <input type="submit" class="btn btn-primary" value="@Messages("validate")">
-            <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
-        </div>
-    }
+            <a href="@routes.Application.index" class="btn btn-default">@Messages("goback")</a>
+
+        }
+    </div>
+
 }

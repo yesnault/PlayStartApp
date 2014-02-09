@@ -1,5 +1,7 @@
 @import helper._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+@implicitFieldConstructor = @{
+    FieldConstructor(twitterBootstrapInput.render)
+}
 
 
 @main() {
@@ -10,7 +12,7 @@
 
     @Messages("resetpassword.mailsent")
     <div class="form-actions">
-        <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
+        <a href="@routes.Application.index" class="btn btn-default">@Messages("goback")</a>
     </div>
 
 }

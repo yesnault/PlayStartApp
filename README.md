@@ -16,12 +16,13 @@ This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags http
 * I18n example (en, fr)
 * Using Typesafe Plugin Mailer : https://github.com/typesafehub/play-plugins/tree/master/mailer
 * Using Twitter Bootstrap 3 : http://twitter.github.com/bootstrap/
+* Using Font-Awesome 4 : http://fortawesome.github.io/Font-Awesome/icons/
 * Using Less and CoffeeScript
-* Using a password generator 
+* Using a password strength checker
 
 ## Try
 * Rename conf/email.conf.example in conf/email.conf and check it (smtp, etc...)
-* Download Play Framework 2 from http://www.playframework.org/
+* Download Play Framework 2.2.1 from http://www.playframework.org/
 * Open a terminal in Play20StartApp directory and exec `play run`
 * Generate Scala Doc & Javadoc with exec `play app-doc` (task app-doc add in Build.scala file)
 

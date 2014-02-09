@@ -2,11 +2,9 @@
 
 @main(user) {
 
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span2">
-            <ul class="breadcrumb">
+    <div class="row">
+        <div class="col col-lg-4">
+            <ul class="nav nav-pills nav-stacked">
                 <li>
                     <a href="@controllers.account.settings.routes.Password.index">@Messages("password")</a>
                 </li>
@@ -15,11 +13,8 @@
                 </li>
             </ul>
         </div>
-        <div class="span10">
-            @content
+        <div class="col col-lg-8">
+        @content
         </div>
     </div>
-</div>
-
-
 }

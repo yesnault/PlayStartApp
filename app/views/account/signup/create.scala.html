@@ -1,17 +1,17 @@
 @(signupForm: Form[Application.Register])
 
-@scripts = {
-    <script src="@routes.Assets.at("javascripts/password.js")" type="text/javascript"></script>
-}
+    @scripts = {
+        <script src="@routes.Assets.at("javascripts/password.js")" type="text/javascript"></script>
+    }
 
 @main(null, scripts) {
     <div class="span3">
-        &nbsp;
+            &nbsp;
     </div>
 
     <div class="span12">
         <div class="well">
-            @createFormOnly(signupForm)
+        @createFormOnly(signupForm)
         </div>
     </div>
 }

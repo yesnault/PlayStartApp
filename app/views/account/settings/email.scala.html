@@ -11,11 +11,12 @@
     @form(controllers.account.settings.routes.Email.runEmail()) {
 
         <fieldset>
-            @inputText(
+        @inputText(
             askForm("email"),
             'placeholder -> Messages("email"),
-            '_label -> null
-            )
+            '_label -> null,
+            'class -> "form-control"
+        )
         </fieldset>
 
         <div class="form-actions">

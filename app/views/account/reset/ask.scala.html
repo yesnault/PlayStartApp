@@ -1,31 +1,37 @@
 @(askForm: Form[controllers.account.Reset.AskForm])
 
 @import helper._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+    @implicitFieldConstructor = @{
+        FieldConstructor(twitterBootstrapInput.render)
+    }
 
 
 @main() {
 
-    <h3>@Messages("resetpassword")</h3>
+    <div class="col col-lg-8">
+        <h3>@Messages("resetpassword")</h3>
 
-    @wflash()
+        @wflash()
 
-    @form(controllers.account.routes.Reset.runAsk()) {
+        @form(controllers.account.routes.Reset.runAsk()) {
 
-        <fieldset>
+            <div class="form-group">
             @inputText(
-            askForm("email"),
-            'placeholder -> Messages("email"),
-            '_label -> null
+                askForm("email"),
+                'placeholder -> Messages("email"),
+                '_label -> null,
+                'class -> "form-control"
             )
-        </fieldset>
+            </div>
 
-        <div class="form-actions">
+            <hr>
             <input type="submit" class="btn btn-primary" value="@Messages("reset")">
 
-            <a href="@routes.Application.index" class="btn">@Messages("goback")</a>
-        </div>
-    }
+            <a href="@routes.Application.index" class="btn btn-default">@Messages("goback")</a>
+
+        }
+
+    </div>
 
 
 }
