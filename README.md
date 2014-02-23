@@ -48,3 +48,7 @@ This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags http
 ## Contact
 Twitter : @yesnault
  
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yesnault/play20startapp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
