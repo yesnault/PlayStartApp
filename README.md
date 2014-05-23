@@ -1,6 +1,6 @@
 # Play20StartApp
 
-This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags https://github.com/yesnault/Play20StartApp/tags for download)
+This is a sample application using Play Framework (See tags https://github.com/yesnault/Play20StartApp/tags for download)
 
 ## Features
 * Sign Up
@@ -22,12 +22,11 @@ This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags http
 
 ## Try
 * Rename conf/email.conf.example in conf/email.conf and check it (smtp, etc...)
-* Download Play Framework 2.2.1 from http://www.playframework.org/
-* Open a terminal in Play20StartApp directory and exec `play run`
-* Generate Scala Doc & Javadoc with exec `play app-doc` (task app-doc add in Build.scala file)
+* Download Activator from http://www.playframework.org/
+* Open a terminal in Play20StartApp directory and exec `activator run`
+* Generate Scala Doc & Javadoc with exec `activator app-doc` (task app-doc add in Build.scala file)
 
 ## Documentation
-* Insecure Cryptography (an explanation of good web app password practices and why they're good) : http://webapp-hardening.heroku.com/insecure_crypto
 * Failing with Passwords (a presentation on issues in user authentication) : http://tersesystems.com/2012/02/17/failing-with-passwords
 * Everything you ever wanted to know about secure password reset : http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html
 
@@ -37,7 +36,8 @@ This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags http
 ## Licence
 * BSD. See LICENSE file
 
-## Deploiement on a Cloud
+## Deployment on a Cloud
+
 ### Cloudbees
 * Online demo : http://play20startapp.yesnault.cloudbees.net/
 * Online Source of this CloudBees Demo : https://github.com/yesnault/Play20StartApp/tree/cloudbees (see README : https://github.com/yesnault/Play20StartApp/tree/cloudbees#deploiement-on-cloudbees)
@@ -48,7 +48,6 @@ This is a sample application using Play Framework 2.0, 2.1 or 2.2 (See tags http
 ## Contact
 Twitter : @yesnault
  
-
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yesnault/play20startapp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
