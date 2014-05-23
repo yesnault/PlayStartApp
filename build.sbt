@@ -4,6 +4,8 @@ name := "Play20StartApp"
 
 version := "1.0-SNAPSHOT"
 
+scalaVersion := "2.10.4"
+
 libraryDependencies ++= Seq(
   jdbc,
   javaEbean,
@@ -15,9 +17,9 @@ libraryDependencies ++= Seq(
 
 resolvers ++= Seq(
     "Apache" at "http://repo1.maven.org/maven2/",
-    "jBCrypt Repository" at "http://repo1.maven.org/maven2/org/"   ,
+    "jBCrypt Repository" at "http://repo1.maven.org/maven2/org/",
     "Sonatype OSS Snasphots" at "http://oss.sonatype.org/content/repositories/snapshots"
 )
 
 
-play.Project.playJavaSettings
+lazy val root = (project in file(".")).enablePlugins(play.PlayJava)
