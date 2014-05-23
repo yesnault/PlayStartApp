@@ -1,6 +1,6 @@
-# Play20StartApp
+# PlayStartApp
 
-This is a sample application using Play Framework (See tags https://github.com/yesnault/Play20StartApp/tags for download)
+This is a sample application using Play Framework (See tags https://github.com/yesnault/PlayStartApp/tags for download)
 
 ## Features
 * Sign Up
@@ -23,7 +23,7 @@ This is a sample application using Play Framework (See tags https://github.com/y
 ## Try
 * Rename conf/email.conf.example in conf/email.conf and check it (smtp, etc...)
 * Download Activator from http://www.playframework.org/
-* Open a terminal in Play20StartApp directory and exec `activator run`
+* Open a terminal in PlayStartApp directory and exec `activator run`
 * Generate Scala Doc & Javadoc with exec `activator app-doc` (task app-doc add in Build.scala file)
 
 ## Documentation
@@ -36,18 +36,5 @@ This is a sample application using Play Framework (See tags https://github.com/y
 ## Licence
 * BSD. See LICENSE file
 
-## Deployment on a Cloud
-
-### Cloudbees
-* Online demo : http://play20startapp.yesnault.cloudbees.net/
-* Online Source of this CloudBees Demo : https://github.com/yesnault/Play20StartApp/tree/cloudbees (see README : https://github.com/yesnault/Play20StartApp/tree/cloudbees#deploiement-on-cloudbees)
-
-[![Build Status](https://buildhive.cloudbees.com/job/yesnault/job/Play20StartApp/badge/icon)](https://buildhive.cloudbees.com/job/yesnault/job/Play20StartApp/)
-
-
 ## Contact
 Twitter : @yesnault
- 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yesnault/play20startapp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

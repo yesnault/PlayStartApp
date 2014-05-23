@@ -1,4 +1,4 @@
-title=Play20StartApp
+title=PlayStartApp
 
 confirm=Confirmation
 email=Email
@@ -48,21 +48,21 @@ resetpassword.new.password=New password :
 
 changemail.mailsent=A mail has been sent, please check your mail.
 
-mail.confirm.subject=Welcome to Play20StartApp - Ask for confirmation
-mail.confirm.message=Welcome to Play20StartApp. <br> Click on this link : {0} to confirm your email.
+mail.confirm.subject=Welcome to PlayStartApp - Ask for confirmation
+mail.confirm.message=Welcome to PlayStartApp. <br> Click on this link : {0} to confirm your email.
 
-mail.welcome.subject=Welcome to Play20StartApp
-mail.welcome.message=Welcome to Play20StartApp. <br> Your account is validated. Enjoy !
+mail.welcome.subject=Welcome to PlayStartApp
+mail.welcome.message=Welcome to PlayStartApp. <br> Your account is validated. Enjoy !
 
-mail.reset.ask.subject=Play20StartApp - New password
+mail.reset.ask.subject=PlayStartApp - New password
 # Cannot use You've unescaped here, as the single quote stops the {0}
 mail.reset.ask.message=You asked for your password to be reset.  <br> Click on this link : {0} to change your password.
 
-mail.change.ask.subject=Play20StartApp - Validate email
+mail.change.ask.subject=PlayStartApp - Validate email
 mail.change.ask.message=You asked for your email to be changed.  <br> Click on this link : {0} to validate your email.
 
 mail.reset.fail.subject=Account Access Attempted
 mail.reset.fail.message=You (or someone else) entered this email address when trying to change the password.  However, this email address is not on our list of registered users, and so the attempted password reset has failed.
 
-mail.reset.confirm.subject=Play20StartApp - New password
+mail.reset.confirm.subject=PlayStartApp - New password
 mail.reset.confirm.message=Hello, <br><br> Your password has been reset.

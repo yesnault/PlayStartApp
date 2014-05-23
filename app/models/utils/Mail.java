@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * Send a mail with Play20StartApp.
+ * Send a mail with PlayStartApp.
  * <p/>
  * User: yesnault
  * Date: 24/01/12

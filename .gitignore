@@ -5,7 +5,7 @@ target
 tmp
 .idea
 .idea_modules
-Play20StartApp.iml
+PlayStartApp.iml
 db
 .classpath
 .project

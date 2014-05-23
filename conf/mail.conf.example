@@ -16,8 +16,8 @@ smtp.password=password
 smtp.ssl=true
 
 # Mail user from
-mail.from="Play20StartApp@yourdomain.com"
+mail.from="PlayStartApp@yourdomain.com"
 
 # Mail sign
-mail.sign=The Play20StartApp Team
+mail.sign=The PlayStartApp Team
 

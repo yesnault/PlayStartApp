@@ -23,7 +23,7 @@ import java.util.UUID;
 import static play.data.Form.form;
 
 /**
- * Signup to Play20StartApp : save and send confirm mail.
+ * Signup to PlayStartApp : save and send confirm mail.
  * <p/>
  * User: yesnault
  * Date: 31/01/12
