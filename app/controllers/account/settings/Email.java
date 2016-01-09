@@ -12,7 +12,9 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.account.settings.email;
 import views.html.account.settings.emailValidate;
+import play.libs.mailer.MailerClient;
 
+import javax.inject.Inject;
 import java.net.MalformedURLException;
 
 import static play.data.Form.form;
@@ -25,11 +27,16 @@ import static play.data.Form.form;
  */
 @Security.Authenticated(Secured.class)
 public class Email extends Controller {
+    @Inject
+    MailerClient mailerClient;
 
     public static class AskForm {
         @Constraints.Required
         public String email;
-        public AskForm() {}
+
+        public AskForm() {
+        }
+
         AskForm(String email) {
             this.email = email;
         }
@@ -40,7 +47,7 @@ public class Email extends Controller {
      *
      * @return index settings
      */
-    public static Result index() {
+    public Result index() {
         User user = User.findByEmail(request().username());
         Form<AskForm> askForm = form(AskForm.class);
         askForm = askForm.fill(new AskForm(user.email));
@@ -52,7 +59,7 @@ public class Email extends Controller {
      *
      * @return email page with flash error or success
      */
-    public static Result runEmail() {
+    public Result runEmail() {
         Form<AskForm> askForm = form(AskForm.class).bindFromRequest();
         User user = User.findByEmail(request().username());
 
@@ -63,7 +70,9 @@ public class Email extends Controller {
 
         try {
             String mail = askForm.get().email;
-            Token.sendMailChangeMail(user, mail);
+            Token t = new Token();
+            t.setMailerClient(mailerClient);
+            t.sendMailChangeMail(user, mail);
             flash("success", Messages.get("changemail.mailsent"));
             return ok(email.render(user, askForm));
         } catch (MalformedURLException e) {
@@ -78,7 +87,7 @@ public class Email extends Controller {
      *
      * @return email page with flash error or success
      */
-    public static Result validateEmail(String token) {
+    public Result validateEmail(String token) {
         User user = User.findByEmail(request().username());
 
         if (token == null) {

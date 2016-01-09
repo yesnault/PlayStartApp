@@ -12,6 +12,11 @@ import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerClient;
+
+import javax.inject.Inject;
+
 import views.html.account.signup.confirm;
 import views.html.account.signup.create;
 import views.html.account.signup.created;
@@ -29,13 +34,15 @@ import static play.data.Form.form;
  * Date: 31/01/12
  */
 public class Signup extends Controller {
+    @Inject
+    MailerClient mailerClient;
 
     /**
      * Display the create form.
      *
      * @return create form
      */
-    public static Result create() {
+    public Result create() {
         return ok(create.render(form(Application.Register.class)));
     }
 
@@ -44,7 +51,7 @@ public class Signup extends Controller {
      *
      * @return create form
      */
-    public static Result createFormOnly() {
+    public Result createFormOnly() {
         return ok(create.render(form(Application.Register.class)));
     }
 
@@ -53,7 +60,7 @@ public class Signup extends Controller {
      *
      * @return Successfull page or created form if bad
      */
-    public static Result save() {
+    public Result save() {
         Form<Application.Register> registerForm = form(Application.Register.class).bindFromRequest();
 
         if (registerForm.hasErrors()) {
@@ -92,10 +99,10 @@ public class Signup extends Controller {
      * Check if the email already exists.
      *
      * @param registerForm User Form submitted
-     * @param email email address
+     * @param email        email address
      * @return Index if there was a problem, null otherwise
      */
-    private static Result checkBeforeSave(Form<Application.Register> registerForm, String email) {
+    private Result checkBeforeSave(Form<Application.Register> registerForm, String email) {
         // Check unique email
         if (User.findByEmail(email) != null) {
             flash("error", Messages.get("error.email.already.exist"));
@@ -105,13 +112,14 @@ public class Signup extends Controller {
         return null;
     }
 
+
     /**
      * Send the welcome Email with the link to confirm.
      *
      * @param user user created
      * @throws EmailException Exception when sending mail
      */
-    private static void sendMailAskForConfirmation(User user) throws EmailException, MalformedURLException {
+    private void sendMailAskForConfirmation(User user) throws EmailException, MalformedURLException {
         String subject = Messages.get("mail.confirm.subject");
 
         String urlString = "http://" + Configuration.root().getString("server.hostname");
@@ -120,7 +128,8 @@ public class Signup extends Controller {
         String message = Messages.get("mail.confirm.message", url.toString());
 
         Mail.Envelop envelop = new Mail.Envelop(subject, message, user.email);
-        Mail.sendMail(envelop);
+        Mail mailer = new Mail(mailerClient);
+        mailer.sendMail(envelop);
     }
 
     /**
@@ -129,7 +138,7 @@ public class Signup extends Controller {
      * @param token a token attached to the user we're confirming.
      * @return Confirmationpage
      */
-    public static Result confirm(String token) {
+    public Result confirm(String token) {
         User user = User.findByConfirmationToken(token);
         if (user == null) {
             flash("error", Messages.get("error.unknown.email"));
@@ -167,10 +176,11 @@ public class Signup extends Controller {
      * @param user user created
      * @throws EmailException Exception when sending mail
      */
-    private static void sendMailConfirmation(User user) throws EmailException {
+    private void sendMailConfirmation(User user) throws EmailException {
         String subject = Messages.get("mail.welcome.subject");
         String message = Messages.get("mail.welcome.message");
         Mail.Envelop envelop = new Mail.Envelop(subject, message, user.email);
-        Mail.sendMail(envelop);
+        Mail mailer = new Mail(mailerClient);
+        mailer.sendMail(envelop);
     }
 }

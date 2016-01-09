@@ -12,6 +12,11 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.account.reset.ask;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerClient;
+
+import javax.inject.Inject;
+
 import views.html.account.reset.reset;
 import views.html.account.reset.runAsk;
 
@@ -30,6 +35,8 @@ import static play.data.Form.form;
  * Date: 20/01/12
  */
 public class Reset extends Controller {
+    @Inject
+    MailerClient mailerClient;
 
     public static class AskForm {
         @Constraints.Required
@@ -46,7 +53,7 @@ public class Reset extends Controller {
      *
      * @return reset password form
      */
-    public static Result ask() {
+    public Result ask() {
         Form<AskForm> askForm = form(AskForm.class);
         return ok(ask.render(askForm));
     }
@@ -56,7 +63,7 @@ public class Reset extends Controller {
      *
      * @return reset password form if error, runAsk render otherwise
      */
-    public static Result runAsk() {
+    public Result runAsk() {
         Form<AskForm> askForm = form(AskForm.class).bindFromRequest();
 
         if (askForm.hasErrors()) {
@@ -82,7 +89,9 @@ public class Reset extends Controller {
         Logger.debug("Sending password reset link to user " + user);
 
         try {
-            Token.sendMailResetPassword(user);
+            Token t = new Token();
+            t.setMailerClient(mailerClient);
+            t.sendMailResetPassword(user);
             return ok(runAsk.render());
         } catch (MalformedURLException e) {
             Logger.error("Cannot validate URL", e);
@@ -96,15 +105,17 @@ public class Reset extends Controller {
      *
      * @param email the email address to send to.
      */
-    private static void sendFailedPasswordResetAttempt(String email) {
+    private void sendFailedPasswordResetAttempt(String email) {
         String subject = Messages.get("mail.reset.fail.subject");
         String message = Messages.get("mail.reset.fail.message", email);
 
         Mail.Envelop envelop = new Mail.Envelop(subject, message, email);
-        Mail.sendMail(envelop);
+        Mail mailer = new Mail(mailerClient);
+        mailer.sendMail(envelop);
+
     }
 
-    public static Result reset(String token) {
+    public Result reset(String token) {
 
         if (token == null) {
             flash("error", Messages.get("error.technical"));
@@ -133,7 +144,7 @@ public class Reset extends Controller {
     /**
      * @return reset password form
      */
-    public static Result runReset(String token) {
+    public Result runReset(String token) {
         Form<ResetForm> resetForm = form(ResetForm.class).bindFromRequest();
 
         if (resetForm.hasErrors()) {
@@ -186,10 +197,11 @@ public class Reset extends Controller {
      * @param user user created
      * @throws EmailException Exception when sending mail
      */
-    private static void sendPasswordChanged(User user) throws EmailException {
+    private void sendPasswordChanged(User user) throws EmailException {
         String subject = Messages.get("mail.reset.confirm.subject");
         String message = Messages.get("mail.reset.confirm.message");
         Mail.Envelop envelop = new Mail.Envelop(subject, message, user.email);
-        Mail.sendMail(envelop);
+        Mail mailer = new Mail(mailerClient);
+        mailer.sendMail(envelop);
     }
 }

@@ -31,7 +31,7 @@ public class Application extends Controller {
      *
      * @return login page or dashboard
      */
-    public static Result index() {
+    public Result index() {
         // Check that the email matches a confirmed user before we redirect
         String email = ctx().session().get("email");
         if (email != null) {
@@ -122,7 +122,7 @@ public class Application extends Controller {
      *
      * @return Dashboard if auth OK or login form if auth KO
      */
-    public static Result authenticate() {
+    public Result authenticate() {
         Form<Login> loginForm = form(Login.class).bindFromRequest();
 
         Form<Register> registerForm = form(Register.class);
@@ -140,7 +140,7 @@ public class Application extends Controller {
      *
      * @return Index page
      */
-    public static Result logout() {
+    public Result logout() {
         session().clear();
         flash("success", Messages.get("youve.been.logged.out"));
         return GO_HOME;
