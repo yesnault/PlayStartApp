@@ -90,8 +90,7 @@ public class Reset extends Controller {
 
         try {
             Token t = new Token();
-            t.setMailerClient(mailerClient);
-            t.sendMailResetPassword(user);
+            t.sendMailResetPassword(user,mailerClient);
             return ok(runAsk.render());
         } catch (MalformedURLException e) {
             Logger.error("Cannot validate URL", e);

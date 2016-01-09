@@ -27,7 +27,6 @@ import java.util.UUID;
  */
 @Entity
 public class Token extends Model {
-    MailerClient mailerClient;
 
     // Reset tokens will expire after a day.
     private static final int EXPIRATION_DAYS = 1;
@@ -43,9 +42,6 @@ public class Token extends Model {
 
     }
 
-    public void setMailerClient(MailerClient mailerClient) {
-        this.mailerClient = mailerClient;
-    }
 
     @Id
     public String token;
@@ -120,8 +116,8 @@ public class Token extends Model {
      * @param user the current user
      * @throws java.net.MalformedURLException if token is wrong.
      */
-    public void sendMailResetPassword(User user) throws MalformedURLException {
-        sendMail(user, TypeToken.password, null);
+    public void sendMailResetPassword(User user, MailerClient mc) throws MalformedURLException {
+        sendMail(user, TypeToken.password, null, mc);
     }
 
     /**
@@ -131,8 +127,8 @@ public class Token extends Model {
      * @param email email for a change email token
      * @throws java.net.MalformedURLException if token is wrong.
      */
-    public void sendMailChangeMail(User user, @Nullable String email) throws MalformedURLException {
-        sendMail(user, TypeToken.email, email);
+    public void sendMailChangeMail(User user, @Nullable String email,MailerClient mc) throws MalformedURLException {
+        sendMail(user, TypeToken.email, email,mc );
     }
 
     /**
@@ -143,7 +139,7 @@ public class Token extends Model {
      * @param email email for a change email token
      * @throws java.net.MalformedURLException if token is wrong.
      */
-    private void sendMail(User user, TypeToken type, String email) throws MalformedURLException {
+    private void sendMail(User user, TypeToken type, String email, MailerClient mc) throws MalformedURLException {
 
         Token token = getNewToken(user, type, email);
         String externalServer = Configuration.root().getString("server.hostname");
@@ -171,7 +167,7 @@ public class Token extends Model {
 
         Logger.debug("sendMailResetLink: url = " + url);
         Mail.Envelop envelop = new Mail.Envelop(subject, message, toMail);
-        Mail mailer = new Mail(mailerClient);
+        Mail mailer = new Mail(mc);
         mailer.sendMail(envelop);
     }
 

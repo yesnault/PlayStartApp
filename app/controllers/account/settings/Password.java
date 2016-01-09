@@ -43,8 +43,7 @@ public class Password extends Controller {
         User user = User.findByEmail(request().username());
         try {
             Token t = new Token();
-            t.setMailerClient(mailerClient);
-            t.sendMailResetPassword(user);
+            t.sendMailResetPassword(user,mailerClient);
             flash("success", Messages.get("resetpassword.mailsent"));
             return ok(password.render(user));
         } catch (MalformedURLException e) {

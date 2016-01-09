@@ -71,8 +71,7 @@ public class Email extends Controller {
         try {
             String mail = askForm.get().email;
             Token t = new Token();
-            t.setMailerClient(mailerClient);
-            t.sendMailChangeMail(user, mail);
+            t.sendMailChangeMail(user, mail,mailerClient);
             flash("success", Messages.get("changemail.mailsent"));
             return ok(email.render(user, askForm));
         } catch (MalformedURLException e) {
