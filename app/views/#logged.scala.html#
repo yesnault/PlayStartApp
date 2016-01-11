@@ -1,0 +1,14 @@
+@(user: User)
+
+@if(user != null) {
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @user.fullname <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="@controllers.account.settings.routes.Index.index()"><i class="fa fa-wrench"></i> @Messages("settings")</a></li>
+                <li class="divider"></li>
+                <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i> @Messages("logout")</a></li>
+            </ul>
+        </li>
+    </ul>
+}
