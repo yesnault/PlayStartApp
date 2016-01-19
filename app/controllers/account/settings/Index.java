@@ -7,7 +7,7 @@ import play.mvc.Security;
 
 /**
  * Index Settings page.
- *
+ * <p/>
  * User: yesnault
  * Date: 15/05/12
  */
@@ -19,7 +19,7 @@ public class Index extends Controller {
      *
      * @return index settings
      */
-    public static Result index() {
-        return Password.index();
+    public Result index() {
+        return new Password().index();
     }
 }

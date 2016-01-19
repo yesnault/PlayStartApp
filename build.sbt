@@ -4,14 +4,13 @@ name := "PlayStartApp"
 
 version := "1.0-SNAPSHOT"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.10.5"
 
 libraryDependencies ++= Seq(
   jdbc,
-  javaEbean,
   cache,
   "org.mindrot" % "jbcrypt" % "0.3m",
-  "com.typesafe" %% "play-plugins-mailer" % "2.2.0",
+  "com.typesafe.play" %% "play-mailer" % "3.0.1",
   filters
 )
 
@@ -20,6 +19,7 @@ resolvers ++= Seq(
     "jBCrypt Repository" at "http://repo1.maven.org/maven2/org/",
     "Sonatype OSS Snasphots" at "http://oss.sonatype.org/content/repositories/snapshots"
 )
+routesGenerator := InjectedRoutesGenerator
 
+lazy val root = (project in file(".")).enablePlugins(play.PlayJava, PlayEbean)
 
-lazy val root = (project in file(".")).enablePlugins(play.PlayJava)

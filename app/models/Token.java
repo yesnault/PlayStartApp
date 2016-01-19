@@ -5,8 +5,10 @@ import play.Configuration;
 import play.Logger;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
-import play.db.ebean.Model;
+import com.avaje.ebean.Model;
 import play.i18n.Messages;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerClient;
 
 import javax.annotation.Nullable;
 import javax.persistence.Entity;
@@ -25,8 +27,10 @@ import java.util.UUID;
  */
 @Entity
 public class Token extends Model {
+
     // Reset tokens will expire after a day.
     private static final int EXPIRATION_DAYS = 1;
+
 
     public enum TypeToken {
         password("reset"), email("email");
@@ -37,6 +41,7 @@ public class Token extends Model {
         }
 
     }
+
 
     @Id
     public String token;
@@ -95,7 +100,7 @@ public class Token extends Model {
      * @param email email for a token change email
      * @return a reset token
      */
-    private static Token getNewToken(User user, TypeToken type, String email) {
+    private Token getNewToken(User user, TypeToken type, String email) {
         Token token = new Token();
         token.token = UUID.randomUUID().toString();
         token.userId = user.id;
@@ -111,8 +116,8 @@ public class Token extends Model {
      * @param user the current user
      * @throws java.net.MalformedURLException if token is wrong.
      */
-    public static void sendMailResetPassword(User user) throws MalformedURLException {
-        sendMail(user, TypeToken.password, null);
+    public void sendMailResetPassword(User user, MailerClient mc) throws MalformedURLException {
+        sendMail(user, TypeToken.password, null, mc);
     }
 
     /**
@@ -122,8 +127,8 @@ public class Token extends Model {
      * @param email email for a change email token
      * @throws java.net.MalformedURLException if token is wrong.
      */
-    public static void sendMailChangeMail(User user, @Nullable String email) throws MalformedURLException {
-        sendMail(user, TypeToken.email, email);
+    public void sendMailChangeMail(User user, @Nullable String email,MailerClient mc) throws MalformedURLException {
+        sendMail(user, TypeToken.email, email,mc );
     }
 
     /**
@@ -134,7 +139,7 @@ public class Token extends Model {
      * @param email email for a change email token
      * @throws java.net.MalformedURLException if token is wrong.
      */
-    private static void sendMail(User user, TypeToken type, String email) throws MalformedURLException {
+    private void sendMail(User user, TypeToken type, String email, MailerClient mc) throws MalformedURLException {
 
         Token token = getNewToken(user, type, email);
         String externalServer = Configuration.root().getString("server.hostname");
@@ -162,7 +167,8 @@ public class Token extends Model {
 
         Logger.debug("sendMailResetLink: url = " + url);
         Mail.Envelop envelop = new Mail.Envelop(subject, message, toMail);
-        Mail.sendMail(envelop);
+        Mail mailer = new Mail(mc);
+        mailer.sendMail(envelop);
     }
 
 }

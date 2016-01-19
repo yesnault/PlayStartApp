@@ -1,9 +1,12 @@
 package models.utils;
 
-import com.typesafe.plugin.MailerAPI;
-import com.typesafe.plugin.MailerPlugin;
 import play.Configuration;
 import play.Logger;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerClient;
+
+import javax.inject.Inject;
+
 import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
@@ -20,6 +23,12 @@ import java.util.concurrent.TimeUnit;
  * Date: 24/01/12
  */
 public class Mail {
+    MailerClient mailerClient;
+
+    public Mail(MailerClient mailerClient) {
+        this.mailerClient = mailerClient;
+    }
+
 
     /**
      * 1 second delay on sending emails
@@ -30,9 +39,9 @@ public class Mail {
      * Envelop to prepare.
      */
     public static class Envelop {
-        private String subject;
-        private String message;
-        private List<String> toEmails;
+        public String subject;
+        public String message;
+        public List<String> toEmails;
 
         /**
          * Constructor of Envelop.
@@ -60,35 +69,39 @@ public class Mail {
      *
      * @param envelop envelop to send
      */
-    public static void sendMail(Mail.Envelop envelop) {
-        EnvelopJob envelopJob = new EnvelopJob(envelop);
+    public void sendMail(Mail.Envelop envelop) {
+        EnvelopJob envelopJob = new EnvelopJob(envelop, mailerClient);
         final FiniteDuration delay = Duration.create(DELAY, TimeUnit.SECONDS);
         Akka.system().scheduler().scheduleOnce(delay, envelopJob, Akka.system().dispatcher());
     }
 
     static class EnvelopJob implements Runnable {
+        MailerClient mailerClient;
         Mail.Envelop envelop;
 
-        public EnvelopJob(Mail.Envelop envelop) {
+        @Inject
+        public EnvelopJob(Mail.Envelop envelop, MailerClient mailerClient) {
             this.envelop = envelop;
+            this.mailerClient = mailerClient;
         }
 
         public void run() {
-            MailerAPI email = play.Play.application().plugin(MailerPlugin.class).email();
+            Email email = new Email();
 
             final Configuration root = Configuration.root();
             final String mailFrom = root.getString("mail.from");
+            final String mailSign = root.getString("mail.sign");
+
             email.setFrom(mailFrom);
             email.setSubject(envelop.subject);
+            email.setBodyText(envelop.message + "\n\n " + mailSign);
+            email.setBodyHtml(envelop.message + "<br><br>--<br>" + mailSign);
             for (String toEmail : envelop.toEmails) {
-                email.setRecipient(toEmail);
+                email.addTo(toEmail);
                 Logger.debug("Mail.sendMail: Mail will be sent to " + toEmail);
             }
 
-            final String mailSign = root.getString("mail.sign");
-            email.send(envelop.message + "\n\n " + mailSign,
-                    envelop.message + "<br><br>--<br>" + mailSign);
-
+            mailerClient.send(email);
             Logger.debug("Mail sent - SMTP:" + root.getString("smtp.host")
                     + ":" + root.getString("smtp.port")
                     + " SSL:" + root.getString("smtp.ssl")
