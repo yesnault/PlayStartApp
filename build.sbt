@@ -4,7 +4,7 @@ name := "PlayStartApp"
 
 version := "1.0-SNAPSHOT"
 
-scalaVersion := "2.10.5"
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -21,5 +21,4 @@ resolvers ++= Seq(
 )
 routesGenerator := InjectedRoutesGenerator
 
-lazy val root = (project in file(".")).enablePlugins(play.PlayJava, PlayEbean)
-
+lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
