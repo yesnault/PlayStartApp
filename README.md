@@ -3,7 +3,7 @@
 This is a sample application using Play Framework (See tags https://github.com/yesnault/PlayStartApp/tags for download)
 
 ## Latest activator
-Not compatible, fee free to open a PR.
+This sample application is no longer maintained, but feel free to open a PR to add compatibility.
 
 ## Features
 * Sign Up
