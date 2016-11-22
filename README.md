@@ -2,6 +2,9 @@
 
 This is a sample application using Play Framework (See tags https://github.com/yesnault/PlayStartApp/tags for download)
 
+## Latest activator
+Not compatible, fee free to open a PR.
+
 ## Features
 * Sign Up
 * Sign In
